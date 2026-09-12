@@ -11,7 +11,6 @@ import { LoadingMatchState, MatchReasons, MatchStrengthBadge, ProgressBar, Relat
 import { demoRuntime } from './runtime';
 import { requiresProviderConfirmation, statusLabel } from '../domain/status';
 import type {
-  DemoAssessmentInput,
   FinancialUrgency,
   GraphEdgeView,
   GraphRecommendation,
@@ -380,10 +379,17 @@ const workPriorityOptions: Array<{ value: WorkPriority; title: string; detail: s
   { value: 'balanced', title: 'Balanced', detail: 'Keep direct work, pathways, and future demand in view.' },
 ];
 
+interface IntakeDraft {
+  preferredCounties: IntakeCounty[];
+  availability: IntakeAvailability | null;
+  financialUrgency: FinancialUrgency | null;
+  workPriority: WorkPriority | null;
+}
+
 function IntakePage() {
   const navigate = useNavigate();
   const { setPreferredCounties } = useDemoState();
-  const [answers, setAnswers] = useState<DemoAssessmentInput | null>(null);
+  const [answers, setAnswers] = useState<IntakeDraft | null>(null);
   const [profileEvidence, setProfileEvidence] = useState<string[]>([]);
   const [step, setStep] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -395,13 +401,15 @@ function IntakePage() {
     void demoRuntime.repositories.intake.getPrefill()
       .then((prefill) => {
         if (!isCurrent) return;
-        const source = prefill.assessment ?? prefill.demoAnswers;
-        setAnswers({
-          preferredCounties: [...source.preferredCounties],
-          availability: source.availability,
-          financialUrgency: source.financialUrgency,
-          workPriority: source.workPriority,
-        });
+        const source = prefill.assessment;
+        setAnswers(source
+          ? {
+            preferredCounties: [...source.preferredCounties],
+            availability: source.availability,
+            financialUrgency: source.financialUrgency,
+            workPriority: source.workPriority,
+          }
+          : { preferredCounties: [], availability: null, financialUrgency: null, workPriority: null });
         setProfileEvidence(prefill.profile.graphEvidence);
       })
       .catch(() => {
@@ -431,11 +439,16 @@ function IntakePage() {
 
   const saveAssessment = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!answers) return;
+    if (!answers || !answers.availability || !answers.financialUrgency || !answers.workPriority) return;
     setError(null);
     setIsSaving(true);
     try {
-      await demoRuntime.repositories.intake.saveAssessment(answers);
+      await demoRuntime.repositories.intake.saveAssessment({
+        preferredCounties: answers.preferredCounties,
+        availability: answers.availability,
+        financialUrgency: answers.financialUrgency,
+        workPriority: answers.workPriority,
+      });
       setPreferredCounties(answers.preferredCounties);
       navigate('/demo/von/recommendations');
     } catch (saveError) {
@@ -456,6 +469,11 @@ function IntakePage() {
   const isLastStep = step === 2;
   const selectedCountyCount = answers.preferredCounties.length;
   const stepLabels = ['Search counties', 'Availability & urgency', 'Priority & review'];
+  const stepComplete = [
+    selectedCountyCount > 0,
+    answers.availability !== null && answers.financialUrgency !== null,
+    answers.workPriority !== null,
+  ][step];
 
   return (
     <>
@@ -471,8 +489,8 @@ function IntakePage() {
           return <SelectionCard key={county} name="search-counties" type="checkbox" title={county} detail="Demo search preference" checked={selected} disabled={selected && selectedCountyCount === 1} onChange={() => toggleCounty(county)} />;
         })}</fieldset></section>}
         {step === 1 && <section className="intake-panel"><StepHeader title="When do you want to move?" hint="Pick your current availability." /><fieldset><legend className="sr-only">Current availability</legend><div className="intake-choice-grid">{availabilityOptions.map((option) => <SelectionCard key={option.value} name="availability" type="radio" title={option.title} detail={option.detail} checked={answers.availability === option.value} onChange={() => setAnswers((current) => current ? { ...current, availability: option.value } : current)} />)}</div></fieldset><div className="intake-divider" /><h3>How urgent is near-term income?</h3><fieldset><legend className="sr-only">Financial urgency</legend><div className="intake-choice-grid">{urgencyOptions.map((option) => <SelectionCard key={option.value} name="urgency" type="radio" title={option.title} detail={option.detail} checked={answers.financialUrgency === option.value} onChange={() => setAnswers((current) => current ? { ...current, financialUrgency: option.value } : current)} />)}</div></fieldset><p className="form-note">Urgency changes recommendation order only; it never changes eligibility.</p></section>}
-        {step === 2 && <section className="intake-panel"><StepHeader title="Choose a current priority" hint="What should we favor first?" /><fieldset><legend className="sr-only">Current work priority</legend><div className="intake-choice-grid">{workPriorityOptions.map((option) => <SelectionCard key={option.value} name="work-priority" type="radio" title={option.title} detail={option.detail} checked={answers.workPriority === option.value} onChange={() => setAnswers((current) => current ? { ...current, workPriority: option.value } : current)} />)}</div></fieldset><div className="intake-review"><h3>Ready to create the recommendation view?</h3><dl><div><dt>Search counties</dt><dd>{answers.preferredCounties.join(' and ')}</dd></div><div><dt>Availability</dt><dd>{answers.availability.replaceAll('_', ' ')}</dd></div><div><dt>Financial urgency</dt><dd>{answers.financialUrgency}</dd></div><div><dt>Priority</dt><dd>{answers.workPriority.replaceAll('_', ' ')}</dd></div></dl></div></section>}
-        <div className="intake-actions"><button className="button button--quiet" type="button" disabled={step === 0 || isSaving} onClick={() => setStep((current) => current - 1)}>Back</button>{isLastStep ? <button className="button button--primary" key="submit-recommendations" type="submit" disabled={isSaving}>{isSaving ? 'Saving public-safe selections…' : 'Create my recommendations'}</button> : <button className="button button--primary" key="continue-intake" type="button" onClick={() => setStep((current) => current + 1)}>Continue</button>}</div>
+        {step === 2 && <section className="intake-panel"><StepHeader title="Choose a current priority" hint="What should we favor first?" /><fieldset><legend className="sr-only">Current work priority</legend><div className="intake-choice-grid">{workPriorityOptions.map((option) => <SelectionCard key={option.value} name="work-priority" type="radio" title={option.title} detail={option.detail} checked={answers.workPriority === option.value} onChange={() => setAnswers((current) => current ? { ...current, workPriority: option.value } : current)} />)}</div></fieldset><div className="intake-review"><h3>Ready to create the recommendation view?</h3><dl><div><dt>Search counties</dt><dd>{answers.preferredCounties.join(' and ')}</dd></div><div><dt>Availability</dt><dd>{answers.availability?.replaceAll('_', ' ') ?? 'Not selected yet'}</dd></div><div><dt>Financial urgency</dt><dd>{answers.financialUrgency ?? 'Not selected yet'}</dd></div><div><dt>Priority</dt><dd>{answers.workPriority?.replaceAll('_', ' ') ?? 'Not selected yet'}</dd></div></dl></div></section>}
+        <div className="intake-actions"><button className="button button--quiet" type="button" disabled={step === 0 || isSaving} onClick={() => setStep((current) => current - 1)}>Back</button>{isLastStep ? <button className="button button--primary" key="submit-recommendations" type="submit" disabled={isSaving || !stepComplete}>{isSaving ? 'Saving public-safe selections…' : 'Create my recommendations'}</button> : <button className="button button--primary" key="continue-intake" type="button" disabled={!stepComplete} onClick={() => setStep((current) => current + 1)}>Continue</button>}</div>
       </form>
     </>
   );
