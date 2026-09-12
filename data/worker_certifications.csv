@@ -1,0 +1,9 @@
+cert_id,worker_id,certification_name,issuer,status,valid_through,evidence,source_id,notes
+CERT-VON-CDL-B,WORKER-DEMO-001,Class B Commercial Driver's License,California,active_stated,not_provided,Resume states clean driving record,SRC-VON-RESUME,Do not display license number.
+CERT-VON-OSHA10,WORKER-DEMO-001,OSHA 10-Hour Construction Safety & Health,OSHA-authorized training provider not provided,completed,not_applicable_or_not_provided,Listed in resume certifications,SRC-VON-RESUME,Verify card/details if an employer requires proof.
+CERT-VON-CONFINED16,WORKER-DEMO-001,16-Hour Confined Space Training,Training provider not provided,completed,not_provided,OSHA permit-required confined-space standard 29 CFR 1910.146 cited in resume,SRC-VON-RESUME,Do not represent this as a government-issued license.
+CERT-VON-ASBESTOS8,WORKER-DEMO-001,8-Hour Asbestos Awareness Training,Training provider not provided,completed,not_provided,OSHA 29 CFR 1926.1101(k)(9)(vi) cited in resume,SRC-VON-RESUME,Awareness training is not the same as asbestos-abatement certification.
+CERT-VON-CPR,WORKER-DEMO-001,CPR/AED Certification,Provider not provided,active_stated,2027-07 (day not provided),Resume states valid through July 2027,SRC-VON-RESUME,Do not invent an exact expiration day; verify the card if an employer requires proof.
+CERT-VON-DOT,WORKER-DEMO-001,DOT Compliance & Safety Training,U.S. Army and SFMTA,completed,not_provided,Listed in resume certifications,SRC-VON-RESUME,"Training record, not a standalone government license."
+CERT-VON-HEAVY-EQUIP,WORKER-DEMO-001,Mechanical & Heavy Equipment Operations Training,U.S. Army,completed,not_provided,Listed in resume certifications,SRC-VON-RESUME,Exact equipment endorsements not provided.
+CERT-VON-EMERGENCY,WORKER-DEMO-001,Emergency Response & Hazard Identification Training,Provider not provided,completed,not_provided,Listed in resume certifications,SRC-VON-RESUME,Scope should be confirmed for employer-specific requirements.

@@ -1,0 +1,87 @@
+from_id,from_type,relationship,to_id,to_type,evidence_source_id,confidence,notes
+ORG-CYPRESS,Organization,PROVIDES,PRG-CYPRESS-PA,Program,SRC-CYPRESS-APPLY,high,Provider relationship.
+ORG-CITYBUILD,Organization,PROVIDES,PRG-CITYBUILD-ACADEMY,Program,SRC-CITYBUILD-ACADEMY,high,Provider relationship.
+ORG-CITYBUILD,Organization,PROVIDES,PRG-CITYBUILD-ENS,Program,SRC-CITYBUILD-ENS,high,Provider relationship.
+ORG-MHH,Organization,DELIVERS_WITH,PRG-CITYBUILD-ACADEMY,Program,SRC-MHH-CITYBUILD,high,Partner intake and delivery site.
+ORG-RISING,Organization,PROVIDES,PRG-RISING-WBTB,Program,SRC-RISING-OB,high,Provider relationship.
+ORG-WOJRC,Organization,PROVIDES,PRG-WOJRC-INTAKE,Program,SRC-WOJRC,high,Provider relationship.
+ORG-OAKLANDLEP,Organization,PROVIDES,PRG-OAKLAND-LOCALHIRE,Program,SRC-OAKLAND-LOCALHIRE,medium,Provider relationship.
+ORG-APRISF,Organization,REFERS_TO,PRG-CITYBUILD-ACADEMY,Program,SRC-APRI,high,Community recruitment route.
+ORG-YCD,Organization,REFERS_TO,PRG-CITYBUILD-ACADEMY,Program,SRC-YCD,medium,Community recruitment route.
+ORG-CTWI,Organization,TRACKS,PRG-IBEW6-IW,Program,SRC-CTWI-CAREERS,high,Application tracker.
+ORG-CTWI,Organization,TRACKS,PRG-SMART104,Program,SRC-CTWI-CAREERS,high,Application tracker.
+ORG-CTWI,Organization,TRACKS,PRG-NORCALSOUND,Program,SRC-CTWI-CAREERS,high,Application tracker.
+ORG-CTWI,Organization,TRACKS,PRG-CEMENT,Program,SRC-CTWI-CAREERS,high,Application tracker.
+ORG-CTWI,Organization,TRACKS,PRG-LABORERS,Program,SRC-CTWI-CAREERS,high,Application tracker.
+ORG-CTWI,Organization,TRACKS,PRG-OE3SURVEY,Program,SRC-CTWI-CAREERS,high,Application tracker.
+ORG-CTWI,Organization,TRACKS,PRG-UA483,Program,SRC-CTWI-CAREERS,high,Application tracker.
+ORG-CTWI,Organization,PROVIDES,PRG-CTWI-MATH,Program,SRC-TRADESWOMEN-EVENTS,medium,Test-prep provider.
+ORG-PORTOAK,Organization,WORKFORCE_PARTNER,ORG-CYPRESS,Organization,SRC-PORT-WORKFORCE,high,Port workforce ecosystem.
+ORG-PORTOAK,Organization,WORKFORCE_PARTNER,ORG-CTWI,Organization,SRC-PORT-WORKFORCE,high,MAPLA/workforce ecosystem.
+ORG-PORTOAK,Organization,WORKFORCE_PARTNER,ORG-WOJRC,Organization,SRC-PORT-WORKFORCE,medium,Local workforce ecosystem; confirm current operating role.
+ORG-DIR,Organization,REGISTERS,PRG-IBEW595-IW,Program,SRC-DIR-AIG,high,"Registration, not open status."
+ORG-IBEW595,Organization,PROVIDES,PRG-IBEW595-IW,Program,SRC-BC3-DIRECTORY,high,Provider relationship.
+ORG-SMART104,Organization,PROVIDES,PRG-SMART104,Program,SRC-BC3-DIRECTORY,high,Provider relationship.
+ORG-NORCALSOUND,Organization,PROVIDES,PRG-NORCALSOUND,Program,SRC-BC3-DIRECTORY,high,Provider relationship.
+ORG-CEMENT,Organization,PROVIDES,PRG-CEMENT,Program,SRC-BC3-DIRECTORY,high,Provider relationship.
+ORG-NORCALLABORERS,Organization,PROVIDES,PRG-LABORERS,Program,SRC-BC3-DIRECTORY,high,Provider relationship.
+ORG-OE3SURVEY,Organization,PROVIDES,PRG-OE3SURVEY,Program,SRC-BC3-DIRECTORY,high,Provider relationship.
+ORG-UA483,Organization,PROVIDES,PRG-UA483,Program,SRC-BC3-DIRECTORY,high,Provider relationship.
+ORG-INSULATORS16,Organization,PROVIDES,PRG-INSULATORS16,Program,SRC-TRADESWOMEN-EVENTS,high,Provider relationship.
+ORG-UA38,Organization,PROVIDES,PRG-UA38,Program,SRC-CTWI-CAREERS,high,Provider relationship.
+ORG-RISING,Organization,HOSTS,EVT-RISING-20260917,Event,SRC-RISING-OB,high,Event host.
+ORG-EBMUD,Organization,HOSTS,EVT-EBMUD-20260925,Event,SRC-TRADESWOMEN-EVENTS,high,Event host.
+ORG-INSULATORS16,Organization,HOSTS,EVT-INSULATORS-SHOWCASE-20260930,Event,SRC-TRADESWOMEN-EVENTS,high,Event host.
+ORG-CYPRESS,Organization,HOSTS,EVT-CYPRESS-20261208,Event,SRC-CYPRESS-APPLY,high,Event host.
+ORG-SFPW,Organization,PUBLISHES,OPP-SFPW-11919,Opportunity,SRC-SFPW-BIDS,high,Public bid/demand signal.
+ORG-SFPW,Organization,PUBLISHES,OPP-SFPW-M22,Opportunity,SRC-SFPW-BIDS,high,Public bid/demand signal.
+ORG-SFPW,Organization,PUBLISHES,OPP-SFPW-M23,Opportunity,SRC-SFPW-BIDS,high,Public bid/demand signal.
+ORG-SFPW,Organization,PUBLISHES,OPP-SFPW-FRONT,Opportunity,SRC-SFPW-BIDS,high,Public bid/demand signal.
+ORG-SFPUC,Organization,HIRING_FOR,OPP-SF-WATER-7316,Opportunity,SRC-SF-CITYWIDE,high,Eligible-list route may serve several departments.
+ORG-SFPUC,Organization,HIRING_FOR,OPP-SFPUC-STAT-7341,Opportunity,SRC-BAYWORK-JOBS,medium,Verify official open status.
+WORKER-DEMO-001,Worker,COMPLETED,PRG-CYPRESS-PA,Program,SRC-VON-RESUME,high,"Von completed a 16-week, 640-hour MC3-based Green Construction Pre-Apprenticeship in 2025."
+WORKER-DEMO-001,Worker,WORKED_FOR,ORG-UA342,Organization,SRC-VON-RESUME,high,"Construction Helper, February-July 2026."
+WORKER-DEMO-001,Worker,WORKED_FOR,ORG-SFMTA,Organization,SRC-VON-RESUME,high,"Transit Operator, July 2019-January 2026."
+WORKER-DEMO-001,Worker,WORKED_FOR,ORG-BIGBUS,Organization,SRC-VON-RESUME,high,"Tour Operator, July 2017-July 2019."
+WORKER-DEMO-001,Worker,SERVED_WITH,ORG-USARMY,Organization,SRC-VON-RESUME,high,"Motor Transportation Operator, Specialist E-4, honorably discharged."
+WORKER-DEMO-001,Worker,HAS_CERTIFICATION,CERT-VON-CDL-B,Certification,SRC-VON-RESUME,high,Do not display license number.
+WORKER-DEMO-001,Worker,HAS_CERTIFICATION,CERT-VON-OSHA10,Certification,SRC-VON-RESUME,high,Verify card/details if an employer requires proof.
+WORKER-DEMO-001,Worker,HAS_CERTIFICATION,CERT-VON-CONFINED16,Certification,SRC-VON-RESUME,high,Do not represent this as a government-issued license.
+WORKER-DEMO-001,Worker,HAS_CERTIFICATION,CERT-VON-ASBESTOS8,Certification,SRC-VON-RESUME,high,Awareness training is not the same as asbestos-abatement certification.
+WORKER-DEMO-001,Worker,HAS_CERTIFICATION,CERT-VON-CPR,Certification,SRC-VON-RESUME,high,Do not invent an exact expiration day; verify the card if an employer requires proof.
+WORKER-DEMO-001,Worker,HAS_CERTIFICATION,CERT-VON-DOT,Certification,SRC-VON-RESUME,high,"Training record, not a standalone government license."
+WORKER-DEMO-001,Worker,HAS_CERTIFICATION,CERT-VON-HEAVY-EQUIP,Certification,SRC-VON-RESUME,high,Exact equipment endorsements not provided.
+WORKER-DEMO-001,Worker,HAS_CERTIFICATION,CERT-VON-EMERGENCY,Certification,SRC-VON-RESUME,high,Scope should be confirmed for employer-specific requirements.
+WORKER-DEMO-001,Worker,HAS_SKILL,SKILL-SAFETY,Skill,SRC-VON-RESUME,high,"UA Local 342, SFMTA, U.S. Army and formal OSHA training"
+WORKER-DEMO-001,Worker,HAS_SKILL,SKILL-HAZARD,Skill,SRC-VON-RESUME,high,"Inspections, hazard escalation, Army risk assessments and emergency-response training"
+WORKER-DEMO-001,Worker,HAS_SKILL,SKILL-UTILITY-SUPPORT,Skill,SRC-VON-RESUME,high,UA Local 342 construction helper experience and Cypress Mandela MC3 training
+WORKER-DEMO-001,Worker,HAS_SKILL,SKILL-MATERIAL,Skill,SRC-VON-RESUME,high,"Pipe, fittings, tools, debris, rebar, cement bags, blocks and gravel handling"
+WORKER-DEMO-001,Worker,HAS_SKILL,SKILL-EXCAVATION,Skill,SRC-VON-RESUME,high,UA Local 342 construction helper duties
+WORKER-DEMO-001,Worker,HAS_SKILL,SKILL-TOOLS,Skill,SRC-VON-RESUME,high,UA Local 342 and Cypress Mandela hands-on training
+WORKER-DEMO-001,Worker,HAS_SKILL,SKILL-BLUEPRINT,Skill,SRC-VON-RESUME,high,Cypress Mandela training
+WORKER-DEMO-001,Worker,HAS_SKILL,SKILL-SCHEMATIC,Skill,SRC-VON-RESUME,high,Cypress Mandela training
+WORKER-DEMO-001,Worker,HAS_SKILL,SKILL-INSPECTIONS,Skill,SRC-VON-RESUME,high,"SFMTA, Big Bus and U.S. Army inspection responsibilities"
+WORKER-DEMO-001,Worker,HAS_SKILL,SKILL-PM,Skill,SRC-VON-RESUME,high,U.S. Army and construction tool/equipment maintenance
+WORKER-DEMO-001,Worker,HAS_SKILL,SKILL-HEAVY-EQUIP,Skill,SRC-VON-RESUME,high,U.S. Army vehicles plus 30- to 60-foot SFMTA vehicles
+WORKER-DEMO-001,Worker,HAS_SKILL,SKILL-HAZMAT,Skill,SRC-VON-RESUME,high,"U.S. Army HAZMAT loads, containment and response exercises"
+WORKER-DEMO-001,Worker,HAS_SKILL,SKILL-EMERGENCY,Skill,SRC-VON-RESUME,high,SFMTA operations and U.S. Army exercises
+WORKER-DEMO-001,Worker,HAS_SKILL,SKILL-DISPATCH,Skill,SRC-VON-RESUME,high,SFMTA and commercial transportation operations
+WORKER-DEMO-001,Worker,HAS_SKILL,SKILL-CREW,Skill,SRC-VON-RESUME,high,"Union construction crews, transit operations and military teams"
+WORKER-DEMO-001,Worker,HAS_SKILL,SKILL-DOCUMENT,Skill,SRC-VON-RESUME,high,"Inspection, mechanical concern and operational hazard documentation"
+WORKER-DEMO-001,Worker,HAS_EXPERIENCE,EXP-VON-UA342,Experience,SRC-VON-RESUME,high,"Construction Helper — Concord, CA"
+WORKER-DEMO-001,Worker,HAS_EXPERIENCE,EXP-VON-SFMTA,Experience,SRC-VON-RESUME,high,"Transit Operator — San Francisco, CA"
+WORKER-DEMO-001,Worker,HAS_EXPERIENCE,EXP-VON-BIGBUS,Experience,SRC-VON-RESUME,high,"Tour Operator — San Francisco, CA"
+WORKER-DEMO-001,Worker,HAS_EXPERIENCE,EXP-VON-ARMY,Experience,SRC-VON-RESUME,high,"Motor Transportation Operator; Specialist E-4 — Concord, CA"
+WORKER-DEMO-001,Worker,HAS_EXPERIENCE,EXP-VON-CYPRESS,Experience,SRC-VON-RESUME,high,"Green Construction Pre-Apprenticeship Trainee — Oakland, CA"
+EXP-VON-UA342,Experience,AT_ORGANIZATION,ORG-UA342,Organization,SRC-VON-RESUME,high,2026-02 through 2026-07
+EXP-VON-SFMTA,Experience,AT_ORGANIZATION,ORG-SFMTA,Organization,SRC-VON-RESUME,high,2019-07 through 2026-01
+EXP-VON-BIGBUS,Experience,AT_ORGANIZATION,ORG-BIGBUS,Organization,SRC-VON-RESUME,high,2017-07 through 2019-07
+EXP-VON-ARMY,Experience,AT_ORGANIZATION,ORG-USARMY,Organization,SRC-VON-RESUME,high,2015-10 through 2022-10
+EXP-VON-CYPRESS,Experience,AT_ORGANIZATION,ORG-CYPRESS,Organization,SRC-VON-RESUME,high, through 2025-09
+WORKER-DEMO-001,Worker,MATCHED_TO,OPP-NOCH-JRTECH,Opportunity,SRC-VON-RESUME,medium_high,transferable_skills_match: Electrical blueprint and schematic training; field construction support; inspections; hand/power tools; safety-sensitive experience. Gap: Employer location and full requirements were not verified
+WORKER-DEMO-001,Worker,MATCHED_TO,PRG-LABORERS,Program,SRC-VON-RESUME,medium_high,strong_pathway_match: Recent construction-helper experience; Cypress Mandela MC3 training; OSHA 10; physical material handling; excavation and tools. Gap: Current application steps and prior union status must be confirmed
+WORKER-DEMO-001,Worker,MATCHED_TO,PRG-UA483,Program,SRC-VON-RESUME,medium_high,strong_pathway_match: Pipe and fitting support; union construction environment; OSHA 10; confined-space training; tools and material staging. Gap: Year-round intake instructions and eligibility need confirmation
+WORKER-DEMO-001,Worker,MATCHED_TO,PRG-OE3SURVEY,Program,SRC-VON-RESUME,medium_high,transferable_skills_match: Measurement and layout tools; documentation; hazard identification; field operations. Gap: Surveying-specific education and testing requirements are not provided
+WORKER-DEMO-001,Worker,MATCHED_TO,OPP-SFPW-11919,Opportunity,SRC-VON-RESUME,medium_high,"future_demand_signal: Electrical blueprinting; circuit/schematic familiarity; construction support; tools; material staging; safety training. Gap: This is a public bid, not an individual opening"
+WORKER-DEMO-001,Worker,MATCHED_TO,OPP-SF-WATER-7316,Opportunity,SRC-VON-RESUME,low,requirements_gap: Field inspections; hazard identification; CDL; construction-zone and public-facing experience. Gap: Posting requires two years in water/wastewater field or distribution operations; resume does not show that experience
+WORKER-DEMO-001,Worker,MATCHED_TO,OPP-SF-STAT-7334,Opportunity,SRC-VON-RESUME,low,"requirements_gap: Preventive maintenance, inspections and heavy-equipment operations. Gap: Posting requires four years journey-level stationary-engineer experience or a recognized qualifying substitute"

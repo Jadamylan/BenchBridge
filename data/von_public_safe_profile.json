@@ -1,0 +1,427 @@
+{
+  "metadata": {
+    "display_name": "Von",
+    "profile_type": "real_person_demo_public_safe",
+    "privacy_rule": "First name and professional qualifications only. No contact information or legal identity fields.",
+    "as_of": "2026-09-12"
+  },
+  "worker": {
+    "worker_id": "WORKER-DEMO-001",
+    "display_name": "Von",
+    "profile_type": "real_person_demo_public_safe",
+    "privacy_mode": "public_safe",
+    "legal_name_included": "no",
+    "contact_information_included": "no",
+    "consent_required_before_public_demo": "yes",
+    "current_region": "Bay Area, California",
+    "home_county": "not_provided",
+    "preferred_counties": "San Francisco;Alameda",
+    "availability": "available_for_next_opportunity",
+    "employment_status": "between_assignments",
+    "primary_trade_family": "field_operations;construction;transportation;utility",
+    "experience_summary": "10+ years combined experience across union construction support, commercial transit, commercial driving and U.S. Army motor transportation operations",
+    "target_roles": "utility worker;field technician;construction helper;construction laborer;transportation operator;maintenance support;safety-sensitive operations",
+    "licenses": "Class B CDL; clean driving record",
+    "military_status": "U.S. Army veteran; Specialist E-4; honorably discharged",
+    "training_summary": "Cypress Mandela 16-week / 640-hour MC3-based Green Construction Pre-Apprenticeship completed September 2025",
+    "source_id": "SRC-VON-RESUME",
+    "verified_as_of": "2026-09-12",
+    "notes": "Public demo record derived from a user-provided resume. First name only; no phone, email, LinkedIn URL, street address or legal name."
+  },
+  "experience": [
+    {
+      "experience_id": "EXP-VON-UA342",
+      "worker_id": "WORKER-DEMO-001",
+      "employer_org_id": "ORG-UA342",
+      "role_title": "Construction Helper",
+      "location": "Concord, CA",
+      "start_date": "2026-02",
+      "end_date": "2026-07",
+      "experience_type": "union_construction_support",
+      "key_evidence": "Material handling and staging; pipe and fitting support; hand excavation and trench support; work-area preparation; tool inspection and maintenance; PPE; hazard reporting",
+      "source_id": "SRC-VON-RESUME",
+      "notes": "Resume supplied month/year precision only."
+    },
+    {
+      "experience_id": "EXP-VON-SFMTA",
+      "worker_id": "WORKER-DEMO-001",
+      "employer_org_id": "ORG-SFMTA",
+      "role_title": "Transit Operator",
+      "location": "San Francisco, CA",
+      "start_date": "2019-07",
+      "end_date": "2026-01",
+      "experience_type": "public_transit_operations",
+      "key_evidence": "Operated 30- to 60-foot buses, streetcars and light rail; inspections; DOT/Cal-OSHA compliance; hazard escalation; emergency response; dispatch communication",
+      "source_id": "SRC-VON-RESUME",
+      "notes": "Resume supplied month/year precision only."
+    },
+    {
+      "experience_id": "EXP-VON-BIGBUS",
+      "worker_id": "WORKER-DEMO-001",
+      "employer_org_id": "ORG-BIGBUS",
+      "role_title": "Tour Operator",
+      "location": "San Francisco, CA",
+      "start_date": "2017-07",
+      "end_date": "2019-07",
+      "experience_type": "commercial_transportation",
+      "key_evidence": "Commercial double-deck bus operation; pre/post-trip inspections; tight clearances; steep grades; construction zones; hazard communication",
+      "source_id": "SRC-VON-RESUME",
+      "notes": "Resume supplied month/year precision only."
+    },
+    {
+      "experience_id": "EXP-VON-ARMY",
+      "worker_id": "WORKER-DEMO-001",
+      "employer_org_id": "ORG-USARMY",
+      "role_title": "Motor Transportation Operator; Specialist E-4",
+      "location": "Concord, CA",
+      "start_date": "2015-10",
+      "end_date": "2022-10",
+      "experience_type": "military_transportation_operations",
+      "key_evidence": "Heavy vehicle and equipment operation; HAZMAT transport; inspections; preventive maintenance; spill/leak containment; recovery exercises; risk assessment; junior-personnel training",
+      "source_id": "SRC-VON-RESUME",
+      "notes": "Honorably discharged. Resume supplied month/year precision only."
+    },
+    {
+      "experience_id": "EXP-VON-CYPRESS",
+      "worker_id": "WORKER-DEMO-001",
+      "employer_org_id": "ORG-CYPRESS",
+      "role_title": "Green Construction Pre-Apprenticeship Trainee",
+      "location": "Oakland, CA",
+      "start_date": "",
+      "end_date": "2025-09",
+      "experience_type": "mc3_pre_apprenticeship",
+      "key_evidence": "640 hours; framing; concrete forms/foundations; material handling; electrical blueprinting; circuit and schematic interpretation; measurement/layout; hand and power tools",
+      "source_id": "SRC-VON-RESUME",
+      "notes": "Resume states completion in September 2025 and a 16-week program; exact attendance dates were not provided."
+    }
+  ],
+  "certifications": [
+    {
+      "cert_id": "CERT-VON-CDL-B",
+      "worker_id": "WORKER-DEMO-001",
+      "certification_name": "Class B Commercial Driver's License",
+      "issuer": "California",
+      "status": "active_stated",
+      "valid_through": "not_provided",
+      "evidence": "Resume states clean driving record",
+      "source_id": "SRC-VON-RESUME",
+      "notes": "Do not display license number."
+    },
+    {
+      "cert_id": "CERT-VON-OSHA10",
+      "worker_id": "WORKER-DEMO-001",
+      "certification_name": "OSHA 10-Hour Construction Safety & Health",
+      "issuer": "OSHA-authorized training provider not provided",
+      "status": "completed",
+      "valid_through": "not_applicable_or_not_provided",
+      "evidence": "Listed in resume certifications",
+      "source_id": "SRC-VON-RESUME",
+      "notes": "Verify card/details if an employer requires proof."
+    },
+    {
+      "cert_id": "CERT-VON-CONFINED16",
+      "worker_id": "WORKER-DEMO-001",
+      "certification_name": "16-Hour Confined Space Training",
+      "issuer": "Training provider not provided",
+      "status": "completed",
+      "valid_through": "not_provided",
+      "evidence": "OSHA permit-required confined-space standard 29 CFR 1910.146 cited in resume",
+      "source_id": "SRC-VON-RESUME",
+      "notes": "Do not represent this as a government-issued license."
+    },
+    {
+      "cert_id": "CERT-VON-ASBESTOS8",
+      "worker_id": "WORKER-DEMO-001",
+      "certification_name": "8-Hour Asbestos Awareness Training",
+      "issuer": "Training provider not provided",
+      "status": "completed",
+      "valid_through": "not_provided",
+      "evidence": "OSHA 29 CFR 1926.1101(k)(9)(vi) cited in resume",
+      "source_id": "SRC-VON-RESUME",
+      "notes": "Awareness training is not the same as asbestos-abatement certification."
+    },
+    {
+      "cert_id": "CERT-VON-CPR",
+      "worker_id": "WORKER-DEMO-001",
+      "certification_name": "CPR/AED Certification",
+      "issuer": "Provider not provided",
+      "status": "active_stated",
+      "valid_through": "2027-07 (day not provided)",
+      "evidence": "Resume states valid through July 2027",
+      "source_id": "SRC-VON-RESUME",
+      "notes": "Do not invent an exact expiration day; verify the card if an employer requires proof."
+    },
+    {
+      "cert_id": "CERT-VON-DOT",
+      "worker_id": "WORKER-DEMO-001",
+      "certification_name": "DOT Compliance & Safety Training",
+      "issuer": "U.S. Army and SFMTA",
+      "status": "completed",
+      "valid_through": "not_provided",
+      "evidence": "Listed in resume certifications",
+      "source_id": "SRC-VON-RESUME",
+      "notes": "Training record, not a standalone government license."
+    },
+    {
+      "cert_id": "CERT-VON-HEAVY-EQUIP",
+      "worker_id": "WORKER-DEMO-001",
+      "certification_name": "Mechanical & Heavy Equipment Operations Training",
+      "issuer": "U.S. Army",
+      "status": "completed",
+      "valid_through": "not_provided",
+      "evidence": "Listed in resume certifications",
+      "source_id": "SRC-VON-RESUME",
+      "notes": "Exact equipment endorsements not provided."
+    },
+    {
+      "cert_id": "CERT-VON-EMERGENCY",
+      "worker_id": "WORKER-DEMO-001",
+      "certification_name": "Emergency Response & Hazard Identification Training",
+      "issuer": "Provider not provided",
+      "status": "completed",
+      "valid_through": "not_provided",
+      "evidence": "Listed in resume certifications",
+      "source_id": "SRC-VON-RESUME",
+      "notes": "Scope should be confirmed for employer-specific requirements."
+    }
+  ],
+  "skills": [
+    {
+      "worker_id": "WORKER-DEMO-001",
+      "skill_id": "SKILL-SAFETY",
+      "skill_name": "Job-site safety standards and procedures",
+      "skill_category": "safety",
+      "evidence": "UA Local 342, SFMTA, U.S. Army and formal OSHA training",
+      "proficiency_signal": "strong_multi_context",
+      "source_id": "SRC-VON-RESUME"
+    },
+    {
+      "worker_id": "WORKER-DEMO-001",
+      "skill_id": "SKILL-HAZARD",
+      "skill_name": "Hazard identification and risk assessment",
+      "skill_category": "safety",
+      "evidence": "Inspections, hazard escalation, Army risk assessments and emergency-response training",
+      "proficiency_signal": "strong_multi_context",
+      "source_id": "SRC-VON-RESUME"
+    },
+    {
+      "worker_id": "WORKER-DEMO-001",
+      "skill_id": "SKILL-UTILITY-SUPPORT",
+      "skill_name": "Utility-related construction support",
+      "skill_category": "construction",
+      "evidence": "UA Local 342 construction helper experience and Cypress Mandela MC3 training",
+      "proficiency_signal": "direct_recent",
+      "source_id": "SRC-VON-RESUME"
+    },
+    {
+      "worker_id": "WORKER-DEMO-001",
+      "skill_id": "SKILL-MATERIAL",
+      "skill_name": "Construction material handling and staging",
+      "skill_category": "construction",
+      "evidence": "Pipe, fittings, tools, debris, rebar, cement bags, blocks and gravel handling",
+      "proficiency_signal": "direct_recent",
+      "source_id": "SRC-VON-RESUME"
+    },
+    {
+      "worker_id": "WORKER-DEMO-001",
+      "skill_id": "SKILL-EXCAVATION",
+      "skill_name": "Hand excavation and trench support",
+      "skill_category": "construction",
+      "evidence": "UA Local 342 construction helper duties",
+      "proficiency_signal": "direct_recent",
+      "source_id": "SRC-VON-RESUME"
+    },
+    {
+      "worker_id": "WORKER-DEMO-001",
+      "skill_id": "SKILL-TOOLS",
+      "skill_name": "Hand and power tool operation",
+      "skill_category": "construction",
+      "evidence": "UA Local 342 and Cypress Mandela hands-on training",
+      "proficiency_signal": "direct_recent",
+      "source_id": "SRC-VON-RESUME"
+    },
+    {
+      "worker_id": "WORKER-DEMO-001",
+      "skill_id": "SKILL-BLUEPRINT",
+      "skill_name": "Electrical blueprint reading",
+      "skill_category": "technical",
+      "evidence": "Cypress Mandela training",
+      "proficiency_signal": "trained_foundational",
+      "source_id": "SRC-VON-RESUME"
+    },
+    {
+      "worker_id": "WORKER-DEMO-001",
+      "skill_id": "SKILL-SCHEMATIC",
+      "skill_name": "Circuit and schematic diagram interpretation",
+      "skill_category": "technical",
+      "evidence": "Cypress Mandela training",
+      "proficiency_signal": "trained_foundational",
+      "source_id": "SRC-VON-RESUME"
+    },
+    {
+      "worker_id": "WORKER-DEMO-001",
+      "skill_id": "SKILL-INSPECTIONS",
+      "skill_name": "Vehicle and equipment inspections",
+      "skill_category": "operations",
+      "evidence": "SFMTA, Big Bus and U.S. Army inspection responsibilities",
+      "proficiency_signal": "strong_multi_context",
+      "source_id": "SRC-VON-RESUME"
+    },
+    {
+      "worker_id": "WORKER-DEMO-001",
+      "skill_id": "SKILL-PM",
+      "skill_name": "Preventive maintenance checks",
+      "skill_category": "operations",
+      "evidence": "U.S. Army and construction tool/equipment maintenance",
+      "proficiency_signal": "direct",
+      "source_id": "SRC-VON-RESUME"
+    },
+    {
+      "worker_id": "WORKER-DEMO-001",
+      "skill_id": "SKILL-HEAVY-EQUIP",
+      "skill_name": "Heavy vehicle and equipment operation",
+      "skill_category": "transportation",
+      "evidence": "U.S. Army vehicles plus 30- to 60-foot SFMTA vehicles",
+      "proficiency_signal": "strong_multi_context",
+      "source_id": "SRC-VON-RESUME"
+    },
+    {
+      "worker_id": "WORKER-DEMO-001",
+      "skill_id": "SKILL-HAZMAT",
+      "skill_name": "HAZMAT transportation and safety",
+      "skill_category": "safety",
+      "evidence": "U.S. Army HAZMAT loads, containment and response exercises",
+      "proficiency_signal": "direct",
+      "source_id": "SRC-VON-RESUME"
+    },
+    {
+      "worker_id": "WORKER-DEMO-001",
+      "skill_id": "SKILL-EMERGENCY",
+      "skill_name": "Emergency and incident response",
+      "skill_category": "safety",
+      "evidence": "SFMTA operations and U.S. Army exercises",
+      "proficiency_signal": "strong_multi_context",
+      "source_id": "SRC-VON-RESUME"
+    },
+    {
+      "worker_id": "WORKER-DEMO-001",
+      "skill_id": "SKILL-DISPATCH",
+      "skill_name": "Dispatch and supervisory communication",
+      "skill_category": "operations",
+      "evidence": "SFMTA and commercial transportation operations",
+      "proficiency_signal": "direct_long_term",
+      "source_id": "SRC-VON-RESUME"
+    },
+    {
+      "worker_id": "WORKER-DEMO-001",
+      "skill_id": "SKILL-CREW",
+      "skill_name": "Crew coordination and teamwork",
+      "skill_category": "workplace",
+      "evidence": "Union construction crews, transit operations and military teams",
+      "proficiency_signal": "strong_multi_context",
+      "source_id": "SRC-VON-RESUME"
+    },
+    {
+      "worker_id": "WORKER-DEMO-001",
+      "skill_id": "SKILL-DOCUMENT",
+      "skill_name": "Documentation and recordkeeping",
+      "skill_category": "workplace",
+      "evidence": "Inspection, mechanical concern and operational hazard documentation",
+      "proficiency_signal": "direct_long_term",
+      "source_id": "SRC-VON-RESUME"
+    }
+  ],
+  "match_examples": [
+    {
+      "match_id": "MATCH-VON-NOCH",
+      "worker_id": "WORKER-DEMO-001",
+      "target_id": "OPP-NOCH-JRTECH",
+      "target_type": "Opportunity",
+      "match_tier": "transferable_skills_match",
+      "eligibility_state": "verify_open_and_requirements",
+      "score": 76,
+      "matched_evidence": "Electrical blueprint and schematic training; field construction support; inspections; hand/power tools; safety-sensitive experience",
+      "requirements_gap": "Employer location and full requirements were not verified",
+      "recommended_action": "Confirm posting is open and review employer requirements before applying",
+      "source_id": "SRC-VON-RESUME"
+    },
+    {
+      "match_id": "MATCH-VON-LABORERS",
+      "worker_id": "WORKER-DEMO-001",
+      "target_id": "PRG-LABORERS",
+      "target_type": "Program",
+      "match_tier": "strong_pathway_match",
+      "eligibility_state": "contact_program",
+      "score": 88,
+      "matched_evidence": "Recent construction-helper experience; Cypress Mandela MC3 training; OSHA 10; physical material handling; excavation and tools",
+      "requirements_gap": "Current application steps and prior union status must be confirmed",
+      "recommended_action": "Contact the JATC and ask whether experience supports advanced standing or direct entry",
+      "source_id": "SRC-VON-RESUME"
+    },
+    {
+      "match_id": "MATCH-VON-UA483",
+      "worker_id": "WORKER-DEMO-001",
+      "target_id": "PRG-UA483",
+      "target_type": "Program",
+      "match_tier": "strong_pathway_match",
+      "eligibility_state": "verify_program_intake",
+      "score": 84,
+      "matched_evidence": "Pipe and fitting support; union construction environment; OSHA 10; confined-space training; tools and material staging",
+      "requirements_gap": "Year-round intake instructions and eligibility need confirmation",
+      "recommended_action": "Contact UA Local 483 JAC and verify the current application process",
+      "source_id": "SRC-VON-RESUME"
+    },
+    {
+      "match_id": "MATCH-VON-OE3",
+      "worker_id": "WORKER-DEMO-001",
+      "target_id": "PRG-OE3SURVEY",
+      "target_type": "Program",
+      "match_tier": "transferable_skills_match",
+      "eligibility_state": "contact_program",
+      "score": 72,
+      "matched_evidence": "Measurement and layout tools; documentation; hazard identification; field operations",
+      "requirements_gap": "Surveying-specific education and testing requirements are not provided",
+      "recommended_action": "Review entrance requirements and attend test preparation if needed",
+      "source_id": "SRC-VON-RESUME"
+    },
+    {
+      "match_id": "MATCH-VON-SFPW-TURK",
+      "worker_id": "WORKER-DEMO-001",
+      "target_id": "OPP-SFPW-11919",
+      "target_type": "Opportunity",
+      "match_tier": "future_demand_signal",
+      "eligibility_state": "not_a_job",
+      "score": 81,
+      "matched_evidence": "Electrical blueprinting; circuit/schematic familiarity; construction support; tools; material staging; safety training",
+      "requirements_gap": "This is a public bid, not an individual opening",
+      "recommended_action": "Track the awarded prime and subcontractors for worker demand",
+      "source_id": "SRC-VON-RESUME"
+    },
+    {
+      "match_id": "MATCH-VON-WATER7316",
+      "worker_id": "WORKER-DEMO-001",
+      "target_id": "OPP-SF-WATER-7316",
+      "target_type": "Opportunity",
+      "match_tier": "requirements_gap",
+      "eligibility_state": "likely_not_qualified_from_resume",
+      "score": 45,
+      "matched_evidence": "Field inspections; hazard identification; CDL; construction-zone and public-facing experience",
+      "requirements_gap": "Posting requires two years in water/wastewater field or distribution operations; resume does not show that experience",
+      "recommended_action": "Do not present as a strong match; show the missing requirement transparently",
+      "source_id": "SRC-VON-RESUME"
+    },
+    {
+      "match_id": "MATCH-VON-STAT7334",
+      "worker_id": "WORKER-DEMO-001",
+      "target_id": "OPP-SF-STAT-7334",
+      "target_type": "Opportunity",
+      "match_tier": "requirements_gap",
+      "eligibility_state": "likely_not_qualified_from_resume",
+      "score": 38,
+      "matched_evidence": "Preventive maintenance, inspections and heavy-equipment operations",
+      "requirements_gap": "Posting requires four years journey-level stationary-engineer experience or a recognized qualifying substitute",
+      "recommended_action": "Do not recommend as an immediate application",
+      "source_id": "SRC-VON-RESUME"
+    }
+  ]
+}

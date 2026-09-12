@@ -1,0 +1,22 @@
+dataset,field,type,required,description
+organizations,org_id,string,yes,Stable BenchBridge organization identifier.
+organizations,org_type,enum_string,yes,Organization role in the workforce graph.
+organizations,priority,enum P1-P3,yes,Recommended ingestion/product priority.
+programs,application_status,enum_string,yes,Normalized status; never derive open from registry presence alone.
+programs,next_date,ISO date,no,Next known orientation/application/cohort milestone.
+programs,status_confidence,enum high/medium/low,yes,"Confidence in current status, separate from program existence."
+events,status,enum_string,yes,"Upcoming, verify-details, registration-closed or past-monitor state."
+opportunities,opportunity_type,enum job/project_demand_signal,yes,Prevents projects and bids from being shown as individual jobs.
+opportunities,confidence,enum_string,yes,Confidence in source status and any inferred trade classification.
+sources,recommended_ingestion,string,yes,Suggested connector approach and verification rule.
+sources,pii_risk,enum_string,yes,Privacy warning for application/intake workflows.
+workers,profile_type,enum_string,yes,Marks Von as a real-person demo represented with public-safe fields only.
+workers,privacy_mode,enum_string,yes,Controls whether contact and legal identity fields may be displayed; this seed is public_safe.
+worker_certifications,status,enum_string,yes,Resume-stated credential status; proof may still be required by an employer.
+worker_experience,experience_type,enum_string,yes,"Normalizes construction, transit, military and training experience for matching."
+worker_skills,proficiency_signal,enum_string,yes,"Evidence strength derived from the resume, not a formal skill assessment."
+worker_match_examples,match_tier,enum_string,yes,"Separates strong pathway, transferable-skills, future-demand and requirements-gap results."
+worker_match_examples,eligibility_state,enum_string,yes,Prevents transferable experience from being presented as confirmed eligibility.
+relationships,relationship,uppercase enum,yes,Neo4j edge type; seed script emits literal relationship types.
+all,source_id,foreign key,yes,Evidence source; joins to sources.csv.
+all,verified_as_of,ISO date,yes,Date the record was checked. Use it to drive stale-state UI.

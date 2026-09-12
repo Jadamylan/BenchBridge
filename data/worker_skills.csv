@@ -1,0 +1,17 @@
+worker_id,skill_id,skill_name,skill_category,evidence,proficiency_signal,source_id
+WORKER-DEMO-001,SKILL-SAFETY,Job-site safety standards and procedures,safety,"UA Local 342, SFMTA, U.S. Army and formal OSHA training",strong_multi_context,SRC-VON-RESUME
+WORKER-DEMO-001,SKILL-HAZARD,Hazard identification and risk assessment,safety,"Inspections, hazard escalation, Army risk assessments and emergency-response training",strong_multi_context,SRC-VON-RESUME
+WORKER-DEMO-001,SKILL-UTILITY-SUPPORT,Utility-related construction support,construction,UA Local 342 construction helper experience and Cypress Mandela MC3 training,direct_recent,SRC-VON-RESUME
+WORKER-DEMO-001,SKILL-MATERIAL,Construction material handling and staging,construction,"Pipe, fittings, tools, debris, rebar, cement bags, blocks and gravel handling",direct_recent,SRC-VON-RESUME
+WORKER-DEMO-001,SKILL-EXCAVATION,Hand excavation and trench support,construction,UA Local 342 construction helper duties,direct_recent,SRC-VON-RESUME
+WORKER-DEMO-001,SKILL-TOOLS,Hand and power tool operation,construction,UA Local 342 and Cypress Mandela hands-on training,direct_recent,SRC-VON-RESUME
+WORKER-DEMO-001,SKILL-BLUEPRINT,Electrical blueprint reading,technical,Cypress Mandela training,trained_foundational,SRC-VON-RESUME
+WORKER-DEMO-001,SKILL-SCHEMATIC,Circuit and schematic diagram interpretation,technical,Cypress Mandela training,trained_foundational,SRC-VON-RESUME
+WORKER-DEMO-001,SKILL-INSPECTIONS,Vehicle and equipment inspections,operations,"SFMTA, Big Bus and U.S. Army inspection responsibilities",strong_multi_context,SRC-VON-RESUME
+WORKER-DEMO-001,SKILL-PM,Preventive maintenance checks,operations,U.S. Army and construction tool/equipment maintenance,direct,SRC-VON-RESUME
+WORKER-DEMO-001,SKILL-HEAVY-EQUIP,Heavy vehicle and equipment operation,transportation,U.S. Army vehicles plus 30- to 60-foot SFMTA vehicles,strong_multi_context,SRC-VON-RESUME
+WORKER-DEMO-001,SKILL-HAZMAT,HAZMAT transportation and safety,safety,"U.S. Army HAZMAT loads, containment and response exercises",direct,SRC-VON-RESUME
+WORKER-DEMO-001,SKILL-EMERGENCY,Emergency and incident response,safety,SFMTA operations and U.S. Army exercises,strong_multi_context,SRC-VON-RESUME
+WORKER-DEMO-001,SKILL-DISPATCH,Dispatch and supervisory communication,operations,SFMTA and commercial transportation operations,direct_long_term,SRC-VON-RESUME
+WORKER-DEMO-001,SKILL-CREW,Crew coordination and teamwork,workplace,"Union construction crews, transit operations and military teams",strong_multi_context,SRC-VON-RESUME
+WORKER-DEMO-001,SKILL-DOCUMENT,Documentation and recordkeeping,workplace,"Inspection, mechanical concern and operational hazard documentation",direct_long_term,SRC-VON-RESUME

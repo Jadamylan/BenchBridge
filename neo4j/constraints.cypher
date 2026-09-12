@@ -1,0 +1,9 @@
+CREATE CONSTRAINT worker_id IF NOT EXISTS FOR (n:Worker) REQUIRE n.worker_id IS UNIQUE;
+CREATE CONSTRAINT certification_id IF NOT EXISTS FOR (n:Certification) REQUIRE n.cert_id IS UNIQUE;
+CREATE CONSTRAINT skill_id IF NOT EXISTS FOR (n:Skill) REQUIRE n.skill_id IS UNIQUE;
+CREATE CONSTRAINT experience_id IF NOT EXISTS FOR (n:Experience) REQUIRE n.experience_id IS UNIQUE;
+CREATE CONSTRAINT organization_id IF NOT EXISTS FOR (n:Organization) REQUIRE n.org_id IS UNIQUE;
+CREATE CONSTRAINT program_id IF NOT EXISTS FOR (n:Program) REQUIRE n.program_id IS UNIQUE;
+CREATE CONSTRAINT event_id IF NOT EXISTS FOR (n:Event) REQUIRE n.event_id IS UNIQUE;
+CREATE CONSTRAINT opportunity_id IF NOT EXISTS FOR (n:Opportunity) REQUIRE n.opportunity_id IS UNIQUE;
+CREATE CONSTRAINT source_id IF NOT EXISTS FOR (n:Source) REQUIRE n.source_id IS UNIQUE;
