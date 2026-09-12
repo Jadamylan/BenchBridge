@@ -5,7 +5,7 @@ import { AppShell } from '../components/AppShell';
 import { MatchCard } from '../components/MatchCard';
 import { formatDate, SourceInfo } from '../components/SourceInfo';
 import { StatusBadge, TierBadge } from '../components/StatusBadge';
-import { BenchBridgeLogo, BenchBridgeMark } from '../components/BenchBridgeLogo';
+import { BenchBridgeLogo } from '../components/BenchBridgeLogo';
 import { BoltIcon, CheckCircleIcon, ClipboardIcon, GearIcon, HelmetIcon, ShieldIcon, TargetIcon, TruckIcon, WrenchIcon } from '../components/icons';
 import { LoadingMatchState, MatchReasons, MatchStrengthBadge, ProgressBar, RelationshipPath, SelectionCard, StepHeader, type RelationshipStep } from '../components/ui';
 import { demoRuntime } from './runtime';
@@ -115,7 +115,12 @@ function LandingPage() {
             <p className="hero__note">Public-safe demonstration. Matches use transparent, deterministic rules — not a live AI service.</p>
           </div>
           <div className="hero-visual">
-            <div className="hero-figure" aria-hidden="true"><BenchBridgeMark size={220} /></div>
+            <div className="hero-figure">
+              <img
+                src="/brand/benchbridge-hero.png"
+                alt="Line-art illustration of a tradesworker in a hard hat seated on a steel beam holding a hammer"
+              />
+            </div>
             <div className="hero-preview">
               <p className="eyebrow">Recommendation preview</p>
               <div className="hero-preview__row"><div><strong>Utility Locator II</strong><span>Alameda County</span></div><MatchStrengthBadge score={91} /></div>
