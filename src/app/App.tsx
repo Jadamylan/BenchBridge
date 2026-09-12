@@ -5,6 +5,9 @@ import { AppShell } from '../components/AppShell';
 import { MatchCard } from '../components/MatchCard';
 import { formatDate, SourceInfo } from '../components/SourceInfo';
 import { StatusBadge, TierBadge } from '../components/StatusBadge';
+import { BenchBridgeLogo, BenchBridgeMark } from '../components/BenchBridgeLogo';
+import { BoltIcon, CheckCircleIcon, ClipboardIcon, GearIcon, HelmetIcon, ShieldIcon, TargetIcon, TruckIcon, WrenchIcon } from '../components/icons';
+import { LoadingMatchState, MatchReasons, MatchStrengthBadge, ProgressBar, RelationshipPath, SelectionCard, StepHeader, type RelationshipStep } from '../components/ui';
 import { demoRuntime } from './runtime';
 import { requiresProviderConfirmation, statusLabel } from '../domain/status';
 import type {
@@ -41,46 +44,140 @@ function EmptyState({ title, detail }: { title: string; detail: string }) {
   return <div className="empty-state"><h3>{title}</h3><p>{detail}</p></div>;
 }
 
+const workerTypes = [
+  { label: 'Construction', Icon: HelmetIcon },
+  { label: 'Utility', Icon: BoltIcon },
+  { label: 'Transportation', Icon: TruckIcon },
+  { label: 'Field Operations', Icon: ClipboardIcon },
+  { label: 'Safety', Icon: ShieldIcon },
+  { label: 'Skilled Trades', Icon: WrenchIcon },
+  { label: 'Equipment Operations', Icon: GearIcon },
+];
+
+const valueProps = [
+  { label: 'Built for Trades', detail: 'Designed around trade experience, certifications, and availability — not generic job listings.', Icon: HelmetIcon },
+  { label: 'Fast Intake', detail: 'Answer by tapping selections. One question per screen, minimal typing.', Icon: BoltIcon },
+  { label: 'Smarter Matching', detail: 'Transparent, deterministic ranking connects your evidence to real opportunities.', Icon: TargetIcon },
+  { label: 'Know Why You Match', detail: 'Every result shows the specific reasons it fits, plus what to confirm before you act.', Icon: CheckCircleIcon },
+];
+
+const howItWorksSteps = [
+  { title: 'Build your profile', detail: 'Capture your trade experience, skills, and current availability through a guided, tap-only intake.' },
+  { title: 'Get matched', detail: 'BenchBridge ranks live opportunities, pathways, and demand signals connected to your evidence.' },
+  { title: 'See why it fits', detail: 'Each match explains the reasons behind it and what to confirm — never a black box.' },
+];
+
 function LandingPage() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const closeMenu = () => setIsMenuOpen(false);
+
   return (
     <div className="landing">
-      <header className="landing-nav">
-        <Link to="/" className="brand"><span className="brand-mark">B</span>BenchBridge</Link>
-        <Link className="button button--quiet" to="/demo/von">View Von's Demo</Link>
+      <header className="landing-header">
+        <nav className="landing-nav" aria-label="Primary">
+          <BenchBridgeLogo to="/" />
+          <div className="landing-nav-links">
+            <a href="#how-it-works">How It Works</a>
+            <Link to="/demo/von/intake">For Workers</Link>
+            <a href="#value">For Employers</a>
+            <Link to="/demo/von">Sign In</Link>
+          </div>
+        </nav>
+        <div className="landing-nav-cta">
+          <Link className="button button--primary" to="/demo/von/intake">Get Matched</Link>
+          <button
+            className="nav-toggle"
+            type="button"
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
+            aria-label="Toggle navigation menu"
+            onClick={() => setIsMenuOpen((open) => !open)}
+          >☰</button>
+        </div>
       </header>
+      <div className="mobile-menu" id="mobile-menu" hidden={!isMenuOpen}>
+        <a href="#how-it-works" onClick={closeMenu}>How It Works</a>
+        <Link to="/demo/von/intake" onClick={closeMenu}>For Workers</Link>
+        <a href="#value" onClick={closeMenu}>For Employers</a>
+        <Link to="/demo/von" onClick={closeMenu}>Sign In</Link>
+        <Link className="button button--primary" to="/demo/von/intake" onClick={closeMenu}>Get Matched</Link>
+      </div>
       <main>
         <section className="hero">
           <div className="hero__content">
-            <p className="eyebrow">Careers between assignments</p>
-            <h1>Your next move, explained.</h1>
-            <p className="hero__lead">BenchBridge connects skilled-trades experience to jobs, union pathways, workforce support, and future demand—with clear evidence behind every recommendation.</p>
+            <span className="hero__badge"><HelmetIcon style={{ width: '1rem', height: '1rem' }} /> Built for the trades</span>
+            <h1>From the bench to the next job.</h1>
+            <p className="hero__lead">BenchBridge connects tradespeople to work opportunities based on their experience, certifications, location, and availability.</p>
             <div className="hero__actions">
-              <Link className="button button--primary" to="/demo/von/intake">Find My Next Move</Link>
-              <Link className="button button--secondary" to="/demo/von">View Von's Demo</Link>
+              <Link className="button button--primary" to="/demo/von/intake">Find Work</Link>
+              <a className="button button--secondary" href="#how-it-works">See How It Works</a>
             </div>
-            <p className="hero__note">Local, public-safe demonstration. Recommendations use transparent deterministic rules, not a live AI service.</p>
+            <p className="hero__note">Public-safe demonstration. Matches use transparent, deterministic rules — not a live AI service.</p>
           </div>
-          <div className="hero-panel" aria-label="BenchBridge recommendation overview">
-            <p className="eyebrow">The bridge</p>
-            <div className="bridge-step"><span>01</span><div><strong>Evidence</strong><p>Skills, training, work history</p></div></div>
-            <div className="bridge-step"><span>02</span><div><strong>Connection</strong><p>Jobs, pathways, events, demand signals</p></div></div>
-            <div className="bridge-step"><span>03</span><div><strong>Next action</strong><p>What to verify, prepare, or pursue</p></div></div>
+          <div className="hero-visual">
+            <div className="hero-figure" aria-hidden="true"><BenchBridgeMark size={220} /></div>
+            <div className="hero-preview">
+              <p className="eyebrow">Recommendation preview</p>
+              <div className="hero-preview__row"><div><strong>Utility Locator II</strong><span>Alameda County</span></div><MatchStrengthBadge score={91} /></div>
+              <div className="hero-preview__row"><div><strong>MC3 Pre-Apprenticeship</strong><span>San Francisco</span></div><MatchStrengthBadge score={78} /></div>
+            </div>
           </div>
         </section>
+
         <section className="landing-section" id="how-it-works">
-          <p className="eyebrow">How it works</p>
-          <h2>More than a job board</h2>
-          <div className="feature-grid">
-            <article><h3>See the connection</h3><p>Every match explains the experience, skills, and credentials that make it relevant.</p></article>
-            <article><h3>Know what to confirm</h3><p>Gaps and uncertain availability remain visible, so a lead is never presented as a guarantee.</p></article>
-            <article><h3>Plan the bridge</h3><p>Turn a mix of pathways, events, and demand signals into a practical next-step plan.</p></article>
+          <div className="landing-section__head">
+            <p className="eyebrow">How it works</p>
+            <h2>Three steps from experience to opportunity</h2>
+            <p>No resume parsing and no guesswork. Tap through a short intake, then see the reasoning behind every match.</p>
+          </div>
+          <div className="steps-grid">
+            {howItWorksSteps.map((item, index) => (
+              <article className="step-card" key={item.title}>
+                <span className="step-card__number" aria-hidden="true">{index + 1}</span>
+                <h3>{item.title}</h3>
+                <p>{item.detail}</p>
+              </article>
+            ))}
           </div>
         </section>
-        <section className="landing-section landing-section--signal">
-          <div><p className="eyebrow">Built for the real path</p><h2>Jobs now. Pathways next. Demand ahead.</h2></div>
-          <p>BenchBridge separates direct leads from apprenticeships, workforce events, and public projects that may create future worker demand.</p>
+
+        <section className="landing-section">
+          <div className="landing-section__head">
+            <p className="eyebrow">Worker types</p>
+            <h2>Built for the trades that keep the Bay Area running</h2>
+          </div>
+          <div className="type-grid">
+            {workerTypes.map(({ label, Icon }) => (
+              <div className="type-card" key={label}>
+                <span className="type-icon" aria-hidden="true"><Icon /></span>
+                <strong>{label}</strong>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="landing-section" id="value">
+          <div className="landing-section__head">
+            <p className="eyebrow">Why BenchBridge</p>
+            <h2>Matching that tradespeople can trust</h2>
+          </div>
+          <div className="value-grid">
+            {valueProps.map(({ label, detail, Icon }) => (
+              <article className="value-card" key={label}>
+                <span className="value-card__icon" aria-hidden="true"><Icon /></span>
+                <h3>{label}</h3>
+                <p>{detail}</p>
+              </article>
+            ))}
+          </div>
         </section>
       </main>
+      <footer className="landing-footer">
+        <div className="landing-footer__inner">
+          <BenchBridgeLogo to="/" />
+          <span>Public-safe demonstration using Von's demo data. Deterministic matching — not a live AI service.</span>
+        </div>
+      </footer>
     </div>
   );
 }
@@ -231,17 +328,27 @@ function MatchDetailPage() {
 
   const externalAction = match.target.isProjectDemand ? 'Open project source' : match.tier === 'requirements_gap' ? 'Open source to review requirements' : requiresProviderConfirmation(match.target.status) ? 'Confirm with provider' : 'Open external opportunity';
   const saved = isSaved(match.target.id);
+  const relationshipSteps: RelationshipStep[] = [
+    { label: 'Von — your experience & skills', kind: 'you' },
+    { label: `${match.target.title} · ${match.target.experienceLevel}`, link: 'skills and level match' },
+    { label: match.target.organization, kind: 'target', link: 'offered by' },
+  ];
+  const matchReasons = [
+    match.evidence,
+    `${match.target.trade.replaceAll('_', ' ')} trade at ${match.target.experienceLevel}`,
+    `Located in ${match.target.city}, ${match.target.county} County`,
+  ];
   return (
     <>
       <Link className="back-link" to="/demo/von/matches">Back to Matches</Link>
       <PageHeader eyebrow={match.target.opportunityType} title={match.target.title} detail={`${match.target.organization} · ${match.target.county} · ${match.target.city}`} action={<button className="button button--secondary" onClick={() => toggleSaved(match.target.id)}>{saved ? 'Remove saved item' : 'Save this opportunity'}</button>} />
       <section className="detail-hero">
-        <div className="badge-row"><TierBadge tier={match.tier} /><StatusBadge status={match.target.status} /></div>
+        <div className="badge-row"><MatchStrengthBadge score={match.score} /><TierBadge tier={match.tier} /><StatusBadge status={match.target.status} /></div>
         <div className="detail-score"><strong>{match.score}</strong><span>match score</span></div>
         <dl className="detail-meta"><div><dt>Eligibility state</dt><dd>{match.eligibilityState.replaceAll('_', ' ')}</dd></div><div><dt>Deadline or next date</dt><dd>{formatDate(match.target.deadlineOrDate)}</dd></div><div><dt>Trade</dt><dd>{match.target.trade.replaceAll('_', ' ')}</dd></div><div><dt>Experience level</dt><dd>{match.target.experienceLevel}</dd></div></dl>
       </section>
       <div className="detail-grid">
-        <section className="section-block"><p className="eyebrow">Why it fits Von</p><h2>Evidence in the profile</h2><p>{match.evidence}</p></section>
+        <section className="section-block section-block--wide"><p className="eyebrow">Why this match works</p><h2>How BenchBridge found this match</h2><MatchReasons reasons={matchReasons} /><RelationshipPath steps={relationshipSteps} caption="Your path to this opportunity" /></section>
         <section className="section-block"><p className="eyebrow">What is missing or unverified</p><h2>Confirm before acting</h2><p>{match.requirementsGap}</p></section>
         <section className="section-block"><p className="eyebrow">Recommended next action</p><h2>Take a grounded next step</h2><p>{match.recommendedAction}</p>{requiresProviderConfirmation(match.target.status) && <p className="confirmation-note">This record needs confirmation with the provider before treating it as open or available.</p>}<a className="button button--primary" href={match.target.externalUrl} target="_blank" rel="noreferrer">{externalAction}</a></section>
         <section className="section-block"><p className="eyebrow">Research provenance</p><h2>Source and verification</h2><SourceInfo source={match.source} verifiedAsOf={match.target.verifiedAsOf} /><p className="muted">Record status: {statusLabel(match.target.status)}.</p></section>
@@ -267,22 +374,6 @@ const workPriorityOptions: Array<{ value: WorkPriority; title: string; detail: s
   { value: 'paid_pathway', title: 'Paid pathway', detail: 'Favor training or pathway options with a near-term payoff.' },
   { value: 'balanced', title: 'Balanced', detail: 'Keep direct work, pathways, and future demand in view.' },
 ];
-
-function IntakeChoice({
-  name,
-  title,
-  detail,
-  checked,
-  onChange,
-}: {
-  name: string;
-  title: string;
-  detail: string;
-  checked: boolean;
-  onChange: () => void;
-}) {
-  return <label className={`intake-choice${checked ? ' intake-choice--selected' : ''}`}><input type="radio" name={name} checked={checked} onChange={onChange} /><span><strong>{title}</strong><small>{detail}</small></span></label>;
-}
 
 function IntakePage() {
   const navigate = useNavigate();
@@ -359,6 +450,7 @@ function IntakePage() {
 
   const isLastStep = step === 2;
   const selectedCountyCount = answers.preferredCounties.length;
+  const stepLabels = ['Search counties', 'Availability & urgency', 'Priority & review'];
 
   return (
     <>
@@ -367,16 +459,14 @@ function IntakePage() {
         <div><p className="eyebrow">Graph evidence already connected</p><h2>Von’s profile is already in context</h2><div className="tag-list">{profileEvidence.map((evidence) => <span className="tag" key={evidence}>{evidence}</span>)}</div></div>
         <p>Search preferences are not a residence claim. Home county remains not provided.</p>
       </section>
-      <ol className="intake-progress" aria-label="Intake progress">
-        {['Search counties', 'Availability and urgency', 'Priority and review'].map((label, index) => <li className={index === step ? 'intake-progress__step--active' : index < step ? 'intake-progress__step--complete' : ''} key={label}><span>{index + 1}</span>{label}</li>)}
-      </ol>
+      <ProgressBar step={step} total={3} label={stepLabels[step]} />
       <form className="intake-form" onSubmit={saveAssessment}>
-        {step === 0 && <section className="intake-panel"><p className="eyebrow">Step 1 of 3</p><h2>Where should we search?</h2><p>Choose one or both demo search preferences.</p><fieldset className="county-options"><legend className="sr-only">Preferred search counties</legend>{(['San Francisco', 'Alameda'] as IntakeCounty[]).map((county) => {
+        {step === 0 && <section className="intake-panel"><StepHeader title="Where should we search?" hint="Choose one or both demo search preferences." why="These are search preferences, not a residence claim." /><fieldset className="county-options"><legend className="sr-only">Preferred search counties</legend>{(['San Francisco', 'Alameda'] as IntakeCounty[]).map((county) => {
           const selected = answers.preferredCounties.includes(county);
-          return <label className={`county-choice${selected ? ' county-choice--selected' : ''}`} key={county}><input type="checkbox" checked={selected} disabled={selected && selectedCountyCount === 1} onChange={() => toggleCounty(county)} /><span><strong>{county}</strong><small>Demo search preference</small></span></label>;
+          return <SelectionCard key={county} name="search-counties" type="checkbox" title={county} detail="Demo search preference" checked={selected} disabled={selected && selectedCountyCount === 1} onChange={() => toggleCounty(county)} />;
         })}</fieldset></section>}
-        {step === 1 && <section className="intake-panel"><p className="eyebrow">Step 2 of 3</p><h2>When do you want to move?</h2><fieldset><legend className="sr-only">Current availability</legend><div className="intake-choice-grid">{availabilityOptions.map((option) => <IntakeChoice key={option.value} name="availability" {...option} checked={answers.availability === option.value} onChange={() => setAnswers((current) => current ? { ...current, availability: option.value } : current)} />)}</div></fieldset><div className="intake-divider" /><h3>How urgent is near-term income?</h3><fieldset><legend className="sr-only">Financial urgency</legend><div className="intake-choice-grid">{urgencyOptions.map((option) => <IntakeChoice key={option.value} name="urgency" {...option} checked={answers.financialUrgency === option.value} onChange={() => setAnswers((current) => current ? { ...current, financialUrgency: option.value } : current)} />)}</div></fieldset><p className="form-note">Urgency changes recommendation order only; it never changes eligibility.</p></section>}
-        {step === 2 && <section className="intake-panel"><p className="eyebrow">Step 3 of 3</p><h2>Choose a current priority</h2><fieldset><legend className="sr-only">Current work priority</legend><div className="intake-choice-grid">{workPriorityOptions.map((option) => <IntakeChoice key={option.value} name="work-priority" {...option} checked={answers.workPriority === option.value} onChange={() => setAnswers((current) => current ? { ...current, workPriority: option.value } : current)} />)}</div></fieldset><div className="intake-review"><h3>Ready to create the recommendation view?</h3><dl><div><dt>Search counties</dt><dd>{answers.preferredCounties.join(' and ')}</dd></div><div><dt>Availability</dt><dd>{answers.availability.replaceAll('_', ' ')}</dd></div><div><dt>Financial urgency</dt><dd>{answers.financialUrgency}</dd></div><div><dt>Priority</dt><dd>{answers.workPriority.replaceAll('_', ' ')}</dd></div></dl></div></section>}
+        {step === 1 && <section className="intake-panel"><StepHeader title="When do you want to move?" hint="Pick your current availability." /><fieldset><legend className="sr-only">Current availability</legend><div className="intake-choice-grid">{availabilityOptions.map((option) => <SelectionCard key={option.value} name="availability" type="radio" title={option.title} detail={option.detail} checked={answers.availability === option.value} onChange={() => setAnswers((current) => current ? { ...current, availability: option.value } : current)} />)}</div></fieldset><div className="intake-divider" /><h3>How urgent is near-term income?</h3><fieldset><legend className="sr-only">Financial urgency</legend><div className="intake-choice-grid">{urgencyOptions.map((option) => <SelectionCard key={option.value} name="urgency" type="radio" title={option.title} detail={option.detail} checked={answers.financialUrgency === option.value} onChange={() => setAnswers((current) => current ? { ...current, financialUrgency: option.value } : current)} />)}</div></fieldset><p className="form-note">Urgency changes recommendation order only; it never changes eligibility.</p></section>}
+        {step === 2 && <section className="intake-panel"><StepHeader title="Choose a current priority" hint="What should we favor first?" /><fieldset><legend className="sr-only">Current work priority</legend><div className="intake-choice-grid">{workPriorityOptions.map((option) => <SelectionCard key={option.value} name="work-priority" type="radio" title={option.title} detail={option.detail} checked={answers.workPriority === option.value} onChange={() => setAnswers((current) => current ? { ...current, workPriority: option.value } : current)} />)}</div></fieldset><div className="intake-review"><h3>Ready to create the recommendation view?</h3><dl><div><dt>Search counties</dt><dd>{answers.preferredCounties.join(' and ')}</dd></div><div><dt>Availability</dt><dd>{answers.availability.replaceAll('_', ' ')}</dd></div><div><dt>Financial urgency</dt><dd>{answers.financialUrgency}</dd></div><div><dt>Priority</dt><dd>{answers.workPriority.replaceAll('_', ' ')}</dd></div></dl></div></section>}
         <div className="intake-actions"><button className="button button--quiet" type="button" disabled={step === 0 || isSaving} onClick={() => setStep((current) => current - 1)}>Back</button>{isLastStep ? <button className="button button--primary" key="submit-recommendations" type="submit" disabled={isSaving}>{isSaving ? 'Saving public-safe selections…' : 'Create my recommendations'}</button> : <button className="button button--primary" key="continue-intake" type="button" onClick={() => setStep((current) => current + 1)}>Continue</button>}</div>
       </form>
     </>
@@ -399,9 +489,17 @@ function RecommendationCard({ recommendation }: { recommendation: GraphRecommend
   </article>;
 }
 
+const loadingSteps = [
+  'Connecting your experience…',
+  'Reading your saved selections…',
+  'Tracing your graph connections…',
+  'Ranking your strongest matches…',
+];
+
 function RecommendationsPage() {
   const [result, setResult] = useState<RecommendationResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [loadingStep, setLoadingStep] = useState(0);
 
   useEffect(() => {
     let isCurrent = true;
@@ -417,12 +515,20 @@ function RecommendationsPage() {
     };
   }, []);
 
+  useEffect(() => {
+    if (result || error) return;
+    const timer = setInterval(() => {
+      setLoadingStep((current) => (current < loadingSteps.length - 1 ? current + 1 : current));
+    }, 700);
+    return () => clearInterval(timer);
+  }, [result, error]);
+
   if (error) {
     return <section className="empty-state" role="alert"><h2>Recommendations need an intake</h2><p>{error}</p><Link className="button button--primary" to="/demo/von/intake">Complete public-safe intake</Link></section>;
   }
 
   if (!result) {
-    return <section className="empty-state" aria-live="polite"><h2>Building the recommendation view</h2><p>Reading the saved assessment, tracing Neo4j relationships, and applying deterministic priority rules.</p></section>;
+    return <LoadingMatchState steps={loadingSteps} activeIndex={loadingStep} />;
   }
 
   return (

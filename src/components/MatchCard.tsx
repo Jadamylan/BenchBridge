@@ -1,9 +1,27 @@
 import { Link } from 'react-router-dom';
 import type { MatchResult } from '../domain/types';
 import { TierBadge, StatusBadge } from './StatusBadge';
-import { SourceInfo } from './SourceInfo';
+import { SourceInfo, formatDate } from './SourceInfo';
+import { MatchReasons, MatchStrengthBadge } from './ui';
+import { useDemoState } from '../state/DemoState';
+
+function buildMatchReasons(match: MatchResult): string[] {
+  const { target, evidence } = match;
+  const reasons: string[] = [];
+  if (evidence) reasons.push(evidence);
+  if (target.trade) reasons.push(`${target.trade.replaceAll('_', ' ')} trade · ${target.experienceLevel}`);
+  const place = [target.city, target.county ? `${target.county} County` : ''].filter(Boolean).join(', ');
+  if (place) reasons.push(`Located in ${place}`);
+  if (target.deadlineOrDate && !/not (listed|provided)/i.test(target.deadlineOrDate)) {
+    reasons.push(`Target date ${formatDate(target.deadlineOrDate)}`);
+  }
+  return reasons.slice(0, 4);
+}
 
 export function MatchCard({ match, compact = false }: { match: MatchResult; compact?: boolean }) {
+  const { isSaved, toggleSaved } = useDemoState();
+  const saved = isSaved(match.target.id);
+
   return (
     <article className="match-card">
       <div className="match-card__header">
@@ -17,17 +35,23 @@ export function MatchCard({ match, compact = false }: { match: MatchResult; comp
         </div>
       </div>
       <div className="badge-row">
+        <MatchStrengthBadge score={match.score} />
         <TierBadge tier={match.tier} />
         <StatusBadge status={match.target.status} />
       </div>
       {!compact && (
         <>
-          <p><strong>Why it connects:</strong> {match.evidence}</p>
-          <p><strong>Confirm or build:</strong> {match.requirementsGap}</p>
+          <MatchReasons reasons={buildMatchReasons(match)} />
+          <p className="match-card__confirm"><strong>Confirm or build:</strong> {match.requirementsGap}</p>
         </>
       )}
       <SourceInfo source={match.source} verifiedAsOf={match.target.verifiedAsOf} />
-      <Link className="text-link" to={`/demo/von/matches/${match.id}`}>View explanation</Link>
+      <div className="match-card__actions">
+        <Link className="button button--secondary" to={`/demo/von/matches/${match.id}`}>View match</Link>
+        <button className="button button--quiet" type="button" aria-pressed={saved} onClick={() => toggleSaved(match.target.id)}>
+          {saved ? 'Saved ✓' : 'Save'}
+        </button>
+      </div>
     </article>
   );
 }

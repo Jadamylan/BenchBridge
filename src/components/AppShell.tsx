@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { demoRuntime } from '../app/runtime';
 import { useDemoState } from '../state/DemoState';
+import { BenchBridgeLogo } from './BenchBridgeLogo';
 
 const navigation = [
   { to: '/demo/von', label: 'Dashboard', end: true },
@@ -38,7 +39,7 @@ export function AppShell() {
   return (
     <div className="app-shell">
       <header className="topbar">
-        <NavLink to="/" className="brand" aria-label="BenchBridge home"><span className="brand-mark">B</span>BenchBridge</NavLink>
+        <BenchBridgeLogo to="/" />
         <div className="topbar__actions">
           {resetError && <span className="reset-error" role="alert">{resetError}</span>}
           <span className="demo-chip">Von's public-safe demo</span>
