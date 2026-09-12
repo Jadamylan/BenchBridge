@@ -1,13 +1,26 @@
 import { useEffect, useMemo, useState } from 'react';
-import type { ReactNode } from 'react';
-import { Link, Navigate, Route, Routes, useParams } from 'react-router-dom';
+import type { FormEvent, ReactNode } from 'react';
+import { Link, Navigate, Route, Routes, useNavigate, useParams } from 'react-router-dom';
 import { AppShell } from '../components/AppShell';
 import { MatchCard } from '../components/MatchCard';
 import { formatDate, SourceInfo } from '../components/SourceInfo';
 import { StatusBadge, TierBadge } from '../components/StatusBadge';
 import { demoRuntime } from './runtime';
 import { requiresProviderConfirmation, statusLabel } from '../domain/status';
-import type { GraphEdgeView, MatchFilters, MatchResult, Opportunity, WorkforceEvent } from '../domain/types';
+import type {
+  DemoAssessmentInput,
+  FinancialUrgency,
+  GraphEdgeView,
+  GraphRecommendation,
+  IntakeAvailability,
+  IntakeCounty,
+  MatchFilters,
+  MatchResult,
+  Opportunity,
+  RecommendationResponse,
+  WorkforceEvent,
+  WorkPriority,
+} from '../domain/types';
 import { useDemoState } from '../state/DemoState';
 import { getFeaturedEvents, getReadinessSignals, getUpcomingDates } from '../services/demoSelectors';
 
@@ -42,7 +55,7 @@ function LandingPage() {
             <h1>Your next move, explained.</h1>
             <p className="hero__lead">BenchBridge connects skilled-trades experience to jobs, union pathways, workforce support, and future demand—with clear evidence behind every recommendation.</p>
             <div className="hero__actions">
-              <Link className="button button--primary" to="/demo/von">Find My Next Move</Link>
+              <Link className="button button--primary" to="/demo/von/intake">Find My Next Move</Link>
               <Link className="button button--secondary" to="/demo/von">View Von's Demo</Link>
             </div>
             <p className="hero__note">Local, public-safe demonstration. Recommendations use transparent deterministic rules, not a live AI service.</p>
@@ -237,6 +250,195 @@ function MatchDetailPage() {
   );
 }
 
+const availabilityOptions: Array<{ value: IntakeAvailability; title: string; detail: string }> = [
+  { value: 'available_now', title: 'Available now', detail: 'Prioritize current options and conversations.' },
+  { value: 'available_within_30_days', title: 'Available within 30 days', detail: 'Plan around a near-term start date.' },
+  { value: 'exploring_options', title: 'Exploring options', detail: 'Review pathways without a near-term start commitment.' },
+];
+
+const urgencyOptions: Array<{ value: FinancialUrgency; title: string; detail: string }> = [
+  { value: 'high', title: 'High', detail: 'Place current leads and paid pathways earlier in the order.' },
+  { value: 'medium', title: 'Medium', detail: 'Balance direct leads with longer-term pathways.' },
+  { value: 'low', title: 'Low', detail: 'Keep the focus on fit and future options.' },
+];
+
+const workPriorityOptions: Array<{ value: WorkPriority; title: string; detail: string }> = [
+  { value: 'direct_work', title: 'Direct work', detail: 'Favor current work leads that still need provider confirmation.' },
+  { value: 'paid_pathway', title: 'Paid pathway', detail: 'Favor training or pathway options with a near-term payoff.' },
+  { value: 'balanced', title: 'Balanced', detail: 'Keep direct work, pathways, and future demand in view.' },
+];
+
+function IntakeChoice({
+  name,
+  title,
+  detail,
+  checked,
+  onChange,
+}: {
+  name: string;
+  title: string;
+  detail: string;
+  checked: boolean;
+  onChange: () => void;
+}) {
+  return <label className={`intake-choice${checked ? ' intake-choice--selected' : ''}`}><input type="radio" name={name} checked={checked} onChange={onChange} /><span><strong>{title}</strong><small>{detail}</small></span></label>;
+}
+
+function IntakePage() {
+  const navigate = useNavigate();
+  const { setPreferredCounties } = useDemoState();
+  const [answers, setAnswers] = useState<DemoAssessmentInput | null>(null);
+  const [profileEvidence, setProfileEvidence] = useState<string[]>([]);
+  const [step, setStep] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let isCurrent = true;
+    void demoRuntime.repositories.intake.getPrefill()
+      .then((prefill) => {
+        if (!isCurrent) return;
+        const source = prefill.assessment ?? prefill.demoAnswers;
+        setAnswers({
+          preferredCounties: [...source.preferredCounties],
+          availability: source.availability,
+          financialUrgency: source.financialUrgency,
+          workPriority: source.workPriority,
+        });
+        setProfileEvidence(prefill.profile.graphEvidence);
+      })
+      .catch(() => {
+        if (isCurrent) setError('The Neo4j intake service is unavailable. Confirm the server API and database configuration, then try again.');
+      })
+      .finally(() => {
+        if (isCurrent) setIsLoading(false);
+      });
+    return () => {
+      isCurrent = false;
+    };
+  }, []);
+
+  const toggleCounty = (county: IntakeCounty) => {
+    setAnswers((current) => {
+      if (!current) return current;
+      const isSelected = current.preferredCounties.includes(county);
+      if (isSelected && current.preferredCounties.length === 1) return current;
+      return {
+        ...current,
+        preferredCounties: isSelected
+          ? current.preferredCounties.filter((item) => item !== county)
+          : [...current.preferredCounties, county],
+      };
+    });
+  };
+
+  const saveAssessment = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!answers) return;
+    setError(null);
+    setIsSaving(true);
+    try {
+      await demoRuntime.repositories.intake.saveAssessment(answers);
+      setPreferredCounties(answers.preferredCounties);
+      navigate('/demo/von/recommendations');
+    } catch (saveError) {
+      setError(saveError instanceof Error ? saveError.message : 'The intake selections could not be saved.');
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  if (error) {
+    return <section className="empty-state" role="alert"><h2>Intake unavailable</h2><p>{error}</p><Link className="button button--secondary" to="/demo/von">Return to dashboard</Link></section>;
+  }
+
+  if (isLoading || !answers) {
+    return <section className="empty-state" aria-live="polite"><h2>Loading public-safe intake</h2><p>Reading Von’s existing graph evidence and saved selections from Neo4j.</p></section>;
+  }
+
+  const isLastStep = step === 2;
+  const selectedCountyCount = answers.preferredCounties.length;
+
+  return (
+    <>
+      <PageHeader eyebrow="Public-safe check-in" title="What should we prioritize now?" detail="Select only current preferences. This demo does not collect contact details, credentials, or resume text." />
+      <section className="intake-context">
+        <div><p className="eyebrow">Graph evidence already connected</p><h2>Von’s profile is already in context</h2><div className="tag-list">{profileEvidence.map((evidence) => <span className="tag" key={evidence}>{evidence}</span>)}</div></div>
+        <p>Search preferences are not a residence claim. Home county remains not provided.</p>
+      </section>
+      <ol className="intake-progress" aria-label="Intake progress">
+        {['Search counties', 'Availability and urgency', 'Priority and review'].map((label, index) => <li className={index === step ? 'intake-progress__step--active' : index < step ? 'intake-progress__step--complete' : ''} key={label}><span>{index + 1}</span>{label}</li>)}
+      </ol>
+      <form className="intake-form" onSubmit={saveAssessment}>
+        {step === 0 && <section className="intake-panel"><p className="eyebrow">Step 1 of 3</p><h2>Where should we search?</h2><p>Choose one or both demo search preferences.</p><fieldset className="county-options"><legend className="sr-only">Preferred search counties</legend>{(['San Francisco', 'Alameda'] as IntakeCounty[]).map((county) => {
+          const selected = answers.preferredCounties.includes(county);
+          return <label className={`county-choice${selected ? ' county-choice--selected' : ''}`} key={county}><input type="checkbox" checked={selected} disabled={selected && selectedCountyCount === 1} onChange={() => toggleCounty(county)} /><span><strong>{county}</strong><small>Demo search preference</small></span></label>;
+        })}</fieldset></section>}
+        {step === 1 && <section className="intake-panel"><p className="eyebrow">Step 2 of 3</p><h2>When do you want to move?</h2><fieldset><legend className="sr-only">Current availability</legend><div className="intake-choice-grid">{availabilityOptions.map((option) => <IntakeChoice key={option.value} name="availability" {...option} checked={answers.availability === option.value} onChange={() => setAnswers((current) => current ? { ...current, availability: option.value } : current)} />)}</div></fieldset><div className="intake-divider" /><h3>How urgent is near-term income?</h3><fieldset><legend className="sr-only">Financial urgency</legend><div className="intake-choice-grid">{urgencyOptions.map((option) => <IntakeChoice key={option.value} name="urgency" {...option} checked={answers.financialUrgency === option.value} onChange={() => setAnswers((current) => current ? { ...current, financialUrgency: option.value } : current)} />)}</div></fieldset><p className="form-note">Urgency changes recommendation order only; it never changes eligibility.</p></section>}
+        {step === 2 && <section className="intake-panel"><p className="eyebrow">Step 3 of 3</p><h2>Choose a current priority</h2><fieldset><legend className="sr-only">Current work priority</legend><div className="intake-choice-grid">{workPriorityOptions.map((option) => <IntakeChoice key={option.value} name="work-priority" {...option} checked={answers.workPriority === option.value} onChange={() => setAnswers((current) => current ? { ...current, workPriority: option.value } : current)} />)}</div></fieldset><div className="intake-review"><h3>Ready to create the recommendation view?</h3><dl><div><dt>Search counties</dt><dd>{answers.preferredCounties.join(' and ')}</dd></div><div><dt>Availability</dt><dd>{answers.availability.replaceAll('_', ' ')}</dd></div><div><dt>Financial urgency</dt><dd>{answers.financialUrgency}</dd></div><div><dt>Priority</dt><dd>{answers.workPriority.replaceAll('_', ' ')}</dd></div></dl></div></section>}
+        <div className="intake-actions"><button className="button button--quiet" type="button" disabled={step === 0 || isSaving} onClick={() => setStep((current) => current - 1)}>Back</button>{isLastStep ? <button className="button button--primary" key="submit-recommendations" type="submit" disabled={isSaving}>{isSaving ? 'Saving public-safe selections…' : 'Create my recommendations'}</button> : <button className="button button--primary" key="continue-intake" type="button" onClick={() => setStep((current) => current + 1)}>Continue</button>}</div>
+      </form>
+    </>
+  );
+}
+
+const recommendationLanes = [
+  { id: 'recommended', eyebrow: 'Recommended for you', title: 'Pathways to confirm', detail: 'Current training and workforce pathways connected to Von’s graph evidence.' },
+  { id: 'lead_to_verify', eyebrow: 'Lead to verify', title: 'Current work leads', detail: 'Potential direct work that requires provider confirmation before it is treated as open.' },
+  { id: 'future_demand', eyebrow: 'Future demand', title: 'Public-project signals', detail: 'Signals to monitor, not job openings or application actions.' },
+] as const;
+
+function RecommendationCard({ recommendation }: { recommendation: GraphRecommendation }) {
+  return <article className="recommendation-card">
+    <div className="recommendation-card__heading"><div><p className="eyebrow">{recommendation.organization}</p><h3>{recommendation.title}</h3><p>{recommendation.county} · {recommendation.city} · {recommendation.status.replaceAll('_', ' ')}</p></div><div className="recommendation-score"><strong>{recommendation.priorityScore}</strong><span>priority</span></div></div>
+    <p>{recommendation.summary}</p>
+    <div className="recommendation-confirm"><strong>Confirm before acting</strong><span>{recommendation.requirementsToConfirm}</span></div>
+    <div className="evidence-paths"><p className="eyebrow">Evidence path</p>{recommendation.evidencePaths.map((path) => <div className="evidence-path" key={`${path.from}-${path.relationship}-${path.to}`}><span>{path.from}</span><strong>{path.relationship.replaceAll('_', ' ')}</strong><span>{path.to}</span></div>)}</div>
+    <div className="recommendation-actions"><a className="button button--primary" href={recommendation.externalUrl} target="_blank" rel="noreferrer">{recommendation.actionLabel}</a><a className="text-link" href={recommendation.sourceUrl} target="_blank" rel="noreferrer">Source: {recommendation.sourceName}</a></div>
+  </article>;
+}
+
+function RecommendationsPage() {
+  const [result, setResult] = useState<RecommendationResponse | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let isCurrent = true;
+    void demoRuntime.repositories.intake.getRecommendations()
+      .then((response) => {
+        if (isCurrent) setResult(response);
+      })
+      .catch((requestError) => {
+        if (isCurrent) setError(requestError instanceof Error ? requestError.message : 'Recommendations are unavailable.');
+      });
+    return () => {
+      isCurrent = false;
+    };
+  }, []);
+
+  if (error) {
+    return <section className="empty-state" role="alert"><h2>Recommendations need an intake</h2><p>{error}</p><Link className="button button--primary" to="/demo/von/intake">Complete public-safe intake</Link></section>;
+  }
+
+  if (!result) {
+    return <section className="empty-state" aria-live="polite"><h2>Building the recommendation view</h2><p>Reading the saved assessment, tracing Neo4j relationships, and applying deterministic priority rules.</p></section>;
+  }
+
+  return (
+    <>
+      <PageHeader eyebrow="Graph-backed recommendations" title="A grounded next move" detail="These results use saved current selections plus public-safe Neo4j relationships. They use transparent deterministic rules, not a live AI service." action={<Link className="button button--secondary" to="/demo/von/intake">Update selections</Link>} />
+      <section className="recommendation-summary"><div><p className="eyebrow">Current check-in</p><h2>{result.assessment.preferredCounties.join(' and ')}</h2><p>{result.assessment.availability.replaceAll('_', ' ')} · {result.assessment.financialUrgency} urgency · {result.assessment.workPriority.replaceAll('_', ' ')}</p></div><p>Eligibility is graph-derived. Financial urgency changes priority order only.</p></section>
+      <section className="recommendation-stages"><p className="eyebrow">Completed backend actions</p><ol>{result.stages.map((stage) => <li key={stage.id}><span>✓</span><div><strong>{stage.label}</strong><p>{stage.detail}</p></div></li>)}</ol></section>
+      {recommendationLanes.map((lane) => {
+        const recommendations = result.recommendations.filter((recommendation) => recommendation.lane === lane.id);
+        return <section className="recommendation-lane" key={lane.id}><div className="section-heading"><div><p className="eyebrow">{lane.eyebrow}</p><h2>{lane.title}</h2><p>{lane.detail}</p></div><span className="count-pill">{recommendations.length}</span></div>{recommendations.length ? <div className="recommendation-grid">{recommendations.map((recommendation) => <RecommendationCard key={recommendation.id} recommendation={recommendation} />)}</div> : <EmptyState title="No eligible connections in this lane" detail="This result contains only existing graph matches that meet the demo safeguards." />}</section>;
+      })}
+      <section className="graph-bridge-plan"><div><p className="eyebrow">Deterministic Bridge Plan</p><h2>Take the next three grounded steps</h2><p>Built from the ranked eligible graph recommendations.</p></div><ol>{result.bridgePlan.map((action) => <li key={`${action.priority}-${action.title}`}><span>{action.priority}</span><div><strong>{action.title}</strong><p>{action.evidence}</p><small>{action.action}</small></div></li>)}</ol></section>
+    </>
+  );
+}
+
 function RelationshipPage() {
   const [edges, setEdges] = useState<GraphEdgeView[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -292,5 +494,5 @@ function BridgePlanPage() {
 }
 
 export function App() {
-  return <Routes><Route element={<AppShell />}><Route path="/" element={<LandingPage />} /><Route path="/demo/von" element={<DashboardPage />} /><Route path="/demo/von/profile" element={<ProfilePage />} /><Route path="/demo/von/matches" element={<MatchesPage />} /><Route path="/demo/von/matches/:matchId" element={<MatchDetailPage />} /><Route path="/demo/von/graph" element={<RelationshipPage />} /><Route path="/demo/von/bridge-plan" element={<BridgePlanPage />} /><Route path="*" element={<Navigate to="/" replace />} /></Route></Routes>;
+  return <Routes><Route element={<AppShell />}><Route path="/" element={<LandingPage />} /><Route path="/demo/von" element={<DashboardPage />} /><Route path="/demo/von/intake" element={<IntakePage />} /><Route path="/demo/von/recommendations" element={<RecommendationsPage />} /><Route path="/demo/von/profile" element={<ProfilePage />} /><Route path="/demo/von/matches" element={<MatchesPage />} /><Route path="/demo/von/matches/:matchId" element={<MatchDetailPage />} /><Route path="/demo/von/graph" element={<RelationshipPage />} /><Route path="/demo/von/bridge-plan" element={<BridgePlanPage />} /><Route path="*" element={<Navigate to="/" replace />} /></Route></Routes>;
 }

@@ -272,3 +272,82 @@ export interface MatchFilters {
   tier?: MatchTier | '';
   includeExpired?: boolean;
 }
+
+export type IntakeCounty = 'San Francisco' | 'Alameda';
+export type IntakeAvailability = 'available_now' | 'available_within_30_days' | 'exploring_options';
+export type FinancialUrgency = 'high' | 'medium' | 'low';
+export type WorkPriority = 'direct_work' | 'paid_pathway' | 'balanced';
+
+export interface DemoAssessmentInput {
+  preferredCounties: IntakeCounty[];
+  availability: IntakeAvailability;
+  financialUrgency: FinancialUrgency;
+  workPriority: WorkPriority;
+}
+
+export interface DemoAssessment extends DemoAssessmentInput {
+  assessmentId: string;
+  workerId: string;
+  updatedAt: string;
+}
+
+export interface IntakeProfile {
+  workerId: string;
+  displayName: string;
+  targetRoles: string[];
+  graphEvidence: string[];
+}
+
+export interface IntakePrefill {
+  profile: IntakeProfile;
+  demoAnswers: DemoAssessmentInput;
+  assessment: DemoAssessment | null;
+}
+
+export type RecommendationLane = 'recommended' | 'lead_to_verify' | 'future_demand';
+
+export interface RecommendationEvidencePath {
+  from: string;
+  relationship: string;
+  to: string;
+}
+
+export interface GraphRecommendation {
+  id: string;
+  lane: RecommendationLane;
+  tier: Exclude<MatchTier, 'requirements_gap'>;
+  priorityScore: number;
+  title: string;
+  organization: string;
+  county: string;
+  city: string;
+  status: string;
+  actionLabel: string;
+  externalUrl: string;
+  sourceName: string;
+  sourceUrl: string;
+  summary: string;
+  requirementsToConfirm: string;
+  evidencePaths: RecommendationEvidencePath[];
+}
+
+export interface RecommendationStage {
+  id: 'assessment' | 'graph' | 'ranking';
+  label: string;
+  detail: string;
+}
+
+export interface GraphBridgePlanAction {
+  priority: number;
+  title: string;
+  lane: RecommendationLane;
+  action: string;
+  evidence: string;
+}
+
+export interface RecommendationResponse {
+  assessment: DemoAssessment;
+  stages: RecommendationStage[];
+  recommendations: GraphRecommendation[];
+  bridgePlan: GraphBridgePlanAction[];
+}

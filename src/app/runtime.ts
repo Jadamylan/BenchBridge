@@ -1,4 +1,5 @@
 import { ApiGraphRepository } from '../adapters/api/ApiGraphRepository';
+import { ApiIntakeRepository } from '../adapters/api/ApiIntakeRepository';
 import { localRepositories } from '../data/repositories/localRepositories';
 import { LocalBridgePlanService, LocalMatchingService } from '../services/localServices';
 
@@ -10,7 +11,11 @@ const matching = new LocalMatchingService(
 );
 
 export const demoRuntime = {
-  repositories: { ...localRepositories, graph: new ApiGraphRepository() },
+  repositories: {
+    ...localRepositories,
+    graph: new ApiGraphRepository(),
+    intake: new ApiIntakeRepository(),
+  },
   matching,
   explanations: matching,
   bridgePlan: new LocalBridgePlanService(matching, localRepositories.events, localRepositories.sources),

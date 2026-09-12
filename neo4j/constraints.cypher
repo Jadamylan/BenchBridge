@@ -7,3 +7,4 @@ CREATE CONSTRAINT program_id IF NOT EXISTS FOR (n:Program) REQUIRE n.program_id 
 CREATE CONSTRAINT event_id IF NOT EXISTS FOR (n:Event) REQUIRE n.event_id IS UNIQUE;
 CREATE CONSTRAINT opportunity_id IF NOT EXISTS FOR (n:Opportunity) REQUIRE n.opportunity_id IS UNIQUE;
 CREATE CONSTRAINT source_id IF NOT EXISTS FOR (n:Source) REQUIRE n.source_id IS UNIQUE;
+CREATE CONSTRAINT assessment_id IF NOT EXISTS FOR (n:Assessment) REQUIRE n.assessment_id IS UNIQUE;
