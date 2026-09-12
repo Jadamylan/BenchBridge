@@ -46,6 +46,7 @@ async function request(path: string, options: RequestInit): Promise<unknown> {
     throw new Error(message);
   }
 
+  if (response.status === 204) return undefined;
   return validatePayload(path, payload);
 }
 

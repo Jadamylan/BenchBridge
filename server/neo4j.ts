@@ -33,6 +33,9 @@ const intakePrefillQuery = `
     assessment.availability AS availability,
     assessment.financial_urgency AS financial_urgency,
     assessment.work_priority AS work_priority,
+    assessment.trade_level AS trade_level,
+    assessment.trade_experience AS trade_experience,
+    assessment.certifications AS certifications,
     assessment.updated_at AS updated_at
 `;
 
@@ -44,8 +47,39 @@ const upsertAssessmentQuery = `
       assessment.availability = $availability,
       assessment.financial_urgency = $financialUrgency,
       assessment.work_priority = $workPriority,
+      assessment.trade_level = $tradeLevel,
+      assessment.trade_experience = $tradeExperience,
+      assessment.certifications = $certifications,
       assessment.updated_at = toString(datetime())
-  MERGE (worker)-[:HAS_CURRENT_ASSESSMENT]->(assessment)
+  MERGE (worker)-[assessmentRelationship:HAS_CURRENT_ASSESSMENT]->(assessment)
+  SET assessmentRelationship.evidence_source_id = 'SRC-VON-INTAKE',
+      assessmentRelationship.confidence = 'self_reported',
+      assessmentRelationship.notes = 'Current public-safe intake check-in.'
+  WITH worker, assessment
+  OPTIONAL MATCH (worker)-[stale:HAS_TRADE_LEVEL|HAS_EXPERIENCE_IN|HOLDS_CERTIFICATION]->()
+  DELETE stale
+  WITH worker, assessment
+  MERGE (level:TradeLevel {level: $tradeLevel})
+  SET level.name = $tradeLevel
+  MERGE (worker)-[levelRelationship:HAS_TRADE_LEVEL]->(level)
+  SET levelRelationship.evidence_source_id = 'SRC-VON-INTAKE',
+      levelRelationship.confidence = 'self_reported',
+      levelRelationship.notes = 'Current intake selection.'
+  FOREACH (tradeName IN $tradeExperience |
+    MERGE (trade:Trade {name: tradeName})
+    MERGE (worker)-[tradeRelationship:HAS_EXPERIENCE_IN]->(trade)
+    SET tradeRelationship.evidence_source_id = 'SRC-VON-INTAKE',
+        tradeRelationship.confidence = 'self_reported',
+        tradeRelationship.notes = 'Current intake selection.'
+  )
+  FOREACH (certName IN [certification IN $certifications WHERE certification <> 'None of the above'] |
+    MERGE (cert:Certification {name: certName})
+    SET cert.origin = 'intake_self_reported'
+    MERGE (worker)-[certRelationship:HOLDS_CERTIFICATION]->(cert)
+    SET certRelationship.evidence_source_id = 'SRC-VON-INTAKE',
+        certRelationship.confidence = 'self_reported',
+        certRelationship.notes = 'Current intake selection.'
+  )
   RETURN
     assessment.assessment_id AS assessment_id,
     assessment.worker_id AS worker_id,
@@ -53,12 +87,17 @@ const upsertAssessmentQuery = `
     assessment.availability AS availability,
     assessment.financial_urgency AS financial_urgency,
     assessment.work_priority AS work_priority,
+    assessment.trade_level AS trade_level,
+    assessment.trade_experience AS trade_experience,
+    assessment.certifications AS certifications,
     assessment.updated_at AS updated_at
 `;
 
 const resetAssessmentQuery = `
-  MATCH (:Worker {worker_id: $workerId})-[relationship:HAS_CURRENT_ASSESSMENT]->(assessment:Assessment {assessment_id: $assessmentId})
-  DELETE relationship, assessment
+  MATCH (worker:Worker {worker_id: $workerId})
+  OPTIONAL MATCH (worker)-[relationship:HAS_CURRENT_ASSESSMENT]->(assessment:Assessment {assessment_id: $assessmentId})
+  OPTIONAL MATCH (worker)-[intakeRelationship:HAS_TRADE_LEVEL|HAS_EXPERIENCE_IN|HOLDS_CERTIFICATION]->()
+  DELETE relationship, assessment, intakeRelationship
 `;
 
 const recommendationCandidatesQuery = `
@@ -90,6 +129,9 @@ const recommendationCandidatesQuery = `
     source.name AS source_name,
     source.primary_url AS source_url,
     coalesce(target.eligibility, target.experience_level, 'Confirm current requirements with the source.') AS requirements_to_confirm,
+    coalesce(target.trade_categories, '') AS trade_categories,
+    coalesce(target.preferred_certifications, '') AS preferred_certifications,
+    coalesce(target.experience_level, '') AS experience_level_text,
     graphEvidence
 `;
 
@@ -153,6 +195,9 @@ export class Neo4jGraphReader {
         availability: input.availability,
         financialUrgency: input.financialUrgency,
         workPriority: input.workPriority,
+        tradeLevel: input.tradeLevel,
+        tradeExperience: input.tradeExperience,
+        certifications: input.certifications,
       });
       const record = result.records[0];
       if (!record) throw new Error('The demo worker is unavailable.');
@@ -246,6 +291,9 @@ export class Neo4jGraphReader {
           assessment.availability AS availability,
           assessment.financial_urgency AS financial_urgency,
           assessment.work_priority AS work_priority,
+          assessment.trade_level AS trade_level,
+          assessment.trade_experience AS trade_experience,
+          assessment.certifications AS certifications,
           assessment.updated_at AS updated_at
       `, {
         workerId: VON_WORKER_ID,
@@ -287,6 +335,9 @@ function assessmentFromRecord(record: { get(key: string): unknown }): DemoAssess
     availability: requiredString(record, 'availability') as DemoAssessment['availability'],
     financialUrgency: requiredString(record, 'financial_urgency') as DemoAssessment['financialUrgency'],
     workPriority: requiredString(record, 'work_priority') as DemoAssessment['workPriority'],
+    tradeLevel: requiredString(record, 'trade_level') as DemoAssessment['tradeLevel'],
+    tradeExperience: stringArray(record.get('trade_experience')) as DemoAssessment['tradeExperience'],
+    certifications: stringArray(record.get('certifications')) as DemoAssessment['certifications'],
     updatedAt: requiredString(record, 'updated_at'),
   };
 }
@@ -316,6 +367,9 @@ function recommendationCandidateFromRecord(record: { get(key: string): unknown }
     graphSummary: 'This connection is grounded in Von’s public-safe skill evidence and an existing graph match.',
     requirementsToConfirm: requiredString(record, 'requirements_to_confirm'),
     graphEvidence: stringArray(record.get('graphEvidence')),
+    tradeCategories: optionalString(record, 'trade_categories'),
+    preferredCertifications: optionalString(record, 'preferred_certifications'),
+    experienceLevelText: optionalString(record, 'experience_level_text'),
   };
 }
 
@@ -337,6 +391,11 @@ function requiredString(record: { get(key: string): unknown }, key: string): str
     throw new Error(`Neo4j returned an invalid ${key} value.`);
   }
   return value;
+}
+
+function optionalString(record: { get(key: string): unknown }, key: string): string {
+  const value = record.get(key);
+  return typeof value === 'string' ? value : '';
 }
 
 function requiredEnvironment(name: string): string {

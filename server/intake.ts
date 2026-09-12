@@ -1,4 +1,5 @@
 import type {
+  CertificationSelection,
   DemoAssessmentInput,
   FinancialUrgency,
   GraphBridgePlanAction,
@@ -6,6 +7,8 @@ import type {
   IntakeAvailability,
   IntakeCounty,
   RecommendationLane,
+  TradeExperience,
+  TradeLevel,
   WorkPriority,
 } from '../src/domain/types.js';
 
@@ -17,13 +20,47 @@ const availabilityValues = new Set<IntakeAvailability>([
 ]);
 const urgencyValues = new Set<FinancialUrgency>(['high', 'medium', 'low']);
 const workPriorityValues = new Set<WorkPriority>(['direct_work', 'paid_pathway', 'balanced']);
-const inputKeys = new Set(['preferredCounties', 'availability', 'financialUrgency', 'workPriority']);
+const tradeLevelValues = new Set<TradeLevel>(['apprentice', 'journeyman']);
+const tradeExperienceValues = new Set<TradeExperience>([
+  'Electrical',
+  'Construction',
+  'Plumbing',
+  'HVAC',
+  'Boilermaker',
+]);
+const certificationValues = new Set<CertificationSelection>([
+  'OSHA 10',
+  'OSHA 30',
+  'Forklift Certification',
+  'First Aid / CPR',
+  'NCCER',
+  'EPA 608',
+  'Journeyman License',
+  'CDL',
+  'Welding Certification',
+  'Confined Space',
+  'Scissor Lift / Aerial Lift',
+  'None of the above',
+]);
+export const NONE_OF_THE_ABOVE = 'None of the above';
+const inputKeys = new Set([
+  'preferredCounties',
+  'availability',
+  'financialUrgency',
+  'workPriority',
+  'tradeLevel',
+  'tradeExperience',
+  'certifications',
+]);
 
 export const DEMO_ANSWERS: DemoAssessmentInput = {
   preferredCounties: ['San Francisco', 'Alameda'],
   availability: 'available_now',
   financialUrgency: 'high',
   workPriority: 'balanced',
+  tradeLevel: 'journeyman',
+  tradeExperience: ['Construction', 'Electrical'],
+  certifications: ['OSHA 10', 'CDL'],
 };
 
 export class IntakeValidationError extends Error {
@@ -56,6 +93,9 @@ export interface GraphRecommendationCandidate {
   graphSummary: string;
   requirementsToConfirm: string;
   graphEvidence: string[];
+  tradeCategories: string;
+  preferredCertifications: string;
+  experienceLevelText: string;
 }
 
 export function parseDemoAssessmentInput(value: unknown): DemoAssessmentInput {
@@ -82,13 +122,32 @@ export function parseDemoAssessmentInput(value: unknown): DemoAssessmentInput {
   if (typeof value.workPriority !== 'string' || !workPriorityValues.has(value.workPriority as WorkPriority)) {
     throw new IntakeValidationError();
   }
+  if (typeof value.tradeLevel !== 'string' || !tradeLevelValues.has(value.tradeLevel as TradeLevel)) {
+    throw new IntakeValidationError();
+  }
+
+  const tradeExperience = parseSelectionList(value.tradeExperience, tradeExperienceValues);
+  const certifications = parseSelectionList(value.certifications, certificationValues);
 
   return {
     preferredCounties,
     availability: value.availability as IntakeAvailability,
     financialUrgency: value.financialUrgency as FinancialUrgency,
     workPriority: value.workPriority as WorkPriority,
+    tradeLevel: value.tradeLevel as TradeLevel,
+    tradeExperience,
+    certifications: certifications.includes(NONE_OF_THE_ABOVE) ? [NONE_OF_THE_ABOVE] : certifications,
   };
+}
+
+function parseSelectionList<T extends string>(value: unknown, allowed: Set<T>): T[] {
+  if (!Array.isArray(value) || !value.every((item): item is T => typeof item === 'string' && allowed.has(item as T))) {
+    throw new IntakeValidationError();
+  }
+  if (new Set(value).size !== value.length) {
+    throw new IntakeValidationError();
+  }
+  return [...value];
 }
 
 export function toGraphRecommendation(
@@ -162,7 +221,32 @@ function priorityScore(
   if (assessment.workPriority === 'direct_work' && lane === 'lead_to_verify') score += 9;
   if (assessment.workPriority === 'paid_pathway' && lane === 'recommended') score += 9;
 
+  const targetTrades = splitTokens(candidate.tradeCategories);
+  const tradeOverlap = assessment.tradeExperience.some((trade) => {
+    const token = trade.toLowerCase();
+    return targetTrades.some((target) => target.includes(token) || token.includes(target));
+  });
+  if (tradeOverlap) score += 6;
+
+  const preferredCertifications = splitTokens(candidate.preferredCertifications);
+  const heldCertifications = assessment.certifications
+    .filter((certification) => certification !== NONE_OF_THE_ABOVE)
+    .map((certification) => certification.toLowerCase());
+  if (heldCertifications.some((certification) => preferredCertifications.includes(certification))) score += 5;
+
+  const levelText = `${candidate.title} ${candidate.experienceLevelText}`.toLowerCase();
+  const journeyRole = levelText.includes('journey');
+  const apprenticeRole = levelText.includes('apprentice');
+  if (assessment.tradeLevel === 'journeyman' && journeyRole) score += 4;
+  if (assessment.tradeLevel === 'apprentice' && apprenticeRole) score += 4;
+  if (assessment.tradeLevel === 'apprentice' && journeyRole && !apprenticeRole) score -= 6;
+  if (assessment.tradeLevel === 'journeyman' && apprenticeRole && !journeyRole) score -= 3;
+
   return Math.min(score, 99);
+}
+
+function splitTokens(value: string): string[] {
+  return value.split(';').map((item) => item.trim().toLowerCase()).filter(Boolean);
 }
 
 function actionLabel(lane: RecommendationLane): string {

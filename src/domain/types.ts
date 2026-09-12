@@ -13,7 +13,10 @@ export type EntityType =
   | 'Program'
   | 'Opportunity'
   | 'Event'
-  | 'Source';
+  | 'Source'
+  | 'TradeLevel'
+  | 'Trade'
+  | 'Assessment';
 
 export interface Worker {
   worker_id: string;
@@ -277,12 +280,30 @@ export type IntakeCounty = 'San Francisco' | 'Alameda';
 export type IntakeAvailability = 'available_now' | 'available_within_30_days' | 'exploring_options';
 export type FinancialUrgency = 'high' | 'medium' | 'low';
 export type WorkPriority = 'direct_work' | 'paid_pathway' | 'balanced';
+export type TradeLevel = 'apprentice' | 'journeyman';
+export type TradeExperience = 'Electrical' | 'Construction' | 'Plumbing' | 'HVAC' | 'Boilermaker';
+export type CertificationSelection =
+  | 'OSHA 10'
+  | 'OSHA 30'
+  | 'Forklift Certification'
+  | 'First Aid / CPR'
+  | 'NCCER'
+  | 'EPA 608'
+  | 'Journeyman License'
+  | 'CDL'
+  | 'Welding Certification'
+  | 'Confined Space'
+  | 'Scissor Lift / Aerial Lift'
+  | 'None of the above';
 
 export interface DemoAssessmentInput {
   preferredCounties: IntakeCounty[];
   availability: IntakeAvailability;
   financialUrgency: FinancialUrgency;
   workPriority: WorkPriority;
+  tradeLevel: TradeLevel;
+  tradeExperience: TradeExperience[];
+  certifications: CertificationSelection[];
 }
 
 export interface DemoAssessment extends DemoAssessmentInput {

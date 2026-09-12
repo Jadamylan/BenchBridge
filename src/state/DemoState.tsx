@@ -9,6 +9,7 @@ interface DemoStateValue {
   isSaved: (id: string) => boolean;
   toggleSaved: (id: string) => void;
   resetDemo: () => void;
+  resetToken: number;
 }
 
 const DemoStateContext = createContext<DemoStateValue | null>(null);
@@ -36,6 +37,7 @@ export function DemoStateProvider({ children }: { children: ReactNode }) {
   const initial = readStoredState();
   const [preferredCounties, setPreferredCounties] = useState(initial.preferredCounties);
   const [savedIds, setSavedIds] = useState(initial.savedIds);
+  const [resetToken, setResetToken] = useState(0);
 
   useEffect(() => {
     localStorage.setItem(storageKey, JSON.stringify({ preferredCounties, savedIds }));
@@ -51,10 +53,12 @@ export function DemoStateProvider({ children }: { children: ReactNode }) {
       resetDemo: () => {
         setPreferredCounties(demoRuntime.repositories.workers.getDemoWorker().preferredCounties);
         setSavedIds([]);
+        setResetToken((current) => current + 1);
         localStorage.removeItem(storageKey);
       },
+      resetToken,
     }),
-    [preferredCounties, savedIds],
+    [preferredCounties, savedIds, resetToken],
   );
 
   return <DemoStateContext.Provider value={value}>{children}</DemoStateContext.Provider>;

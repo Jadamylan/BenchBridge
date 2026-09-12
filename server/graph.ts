@@ -12,6 +12,9 @@ const entityTypes = new Set<EntityType>([
   'Opportunity',
   'Event',
   'Source',
+  'TradeLevel',
+  'Trade',
+  'Assessment',
 ]);
 
 export const vonGraphQuery = `
@@ -25,7 +28,7 @@ export const vonGraphQuery = `
   RETURN
     CASE
       WHEN relationshipStart:Worker THEN relationshipStart.worker_id
-      WHEN relationshipStart:Certification THEN relationshipStart.cert_id
+      WHEN relationshipStart:Certification THEN coalesce(relationshipStart.cert_id, relationshipStart.name)
       WHEN relationshipStart:Skill THEN relationshipStart.skill_id
       WHEN relationshipStart:Experience THEN relationshipStart.experience_id
       WHEN relationshipStart:Organization THEN relationshipStart.org_id
@@ -33,6 +36,9 @@ export const vonGraphQuery = `
       WHEN relationshipStart:Event THEN relationshipStart.event_id
       WHEN relationshipStart:Opportunity THEN relationshipStart.opportunity_id
       WHEN relationshipStart:Source THEN relationshipStart.source_id
+      WHEN relationshipStart:TradeLevel THEN relationshipStart.level
+      WHEN relationshipStart:Trade THEN relationshipStart.name
+      WHEN relationshipStart:Assessment THEN relationshipStart.assessment_id
     END AS from_id,
     head(labels(relationshipStart)) AS from_type,
     coalesce(
@@ -41,12 +47,13 @@ export const vonGraphQuery = `
       relationshipStart.role_title,
       relationshipStart.certification_name,
       relationshipStart.skill_name,
-      relationshipStart.title
+      relationshipStart.title,
+      relationshipStart.assessment_id
     ) AS from_label,
     type(relationship) AS relationship,
     CASE
       WHEN relationshipEnd:Worker THEN relationshipEnd.worker_id
-      WHEN relationshipEnd:Certification THEN relationshipEnd.cert_id
+      WHEN relationshipEnd:Certification THEN coalesce(relationshipEnd.cert_id, relationshipEnd.name)
       WHEN relationshipEnd:Skill THEN relationshipEnd.skill_id
       WHEN relationshipEnd:Experience THEN relationshipEnd.experience_id
       WHEN relationshipEnd:Organization THEN relationshipEnd.org_id
@@ -54,6 +61,9 @@ export const vonGraphQuery = `
       WHEN relationshipEnd:Event THEN relationshipEnd.event_id
       WHEN relationshipEnd:Opportunity THEN relationshipEnd.opportunity_id
       WHEN relationshipEnd:Source THEN relationshipEnd.source_id
+      WHEN relationshipEnd:TradeLevel THEN relationshipEnd.level
+      WHEN relationshipEnd:Trade THEN relationshipEnd.name
+      WHEN relationshipEnd:Assessment THEN relationshipEnd.assessment_id
     END AS to_id,
     head(labels(relationshipEnd)) AS to_type,
     coalesce(
@@ -62,7 +72,8 @@ export const vonGraphQuery = `
       relationshipEnd.role_title,
       relationshipEnd.certification_name,
       relationshipEnd.skill_name,
-      relationshipEnd.title
+      relationshipEnd.title,
+      relationshipEnd.assessment_id
     ) AS to_label,
     relationship.evidence_source_id AS evidence_source_id,
     relationship.confidence AS confidence,
