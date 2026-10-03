@@ -102,7 +102,7 @@ export function ActivationMap(props: Props) {
         type: "circle",
         source: "points",
         filter: ["==", ["get", "property_id"], ""],
-        paint: { "circle-radius": 18, "circle-color": "#e15a1c", "circle-stroke-color": "#f4f0e6", "circle-stroke-width": 3 },
+        paint: { "circle-radius": 16, "circle-color": "#f4f0e6", "circle-opacity": 0.15, "circle-stroke-color": "#f4f0e6", "circle-stroke-width": 3 },
       });
       const selectFrom = (event: maplibregl.MapMouseEvent & { features?: maplibregl.MapGeoJSONFeature[] }) => {
         const id = event.features?.[0]?.properties?.property_id;
@@ -179,8 +179,28 @@ export function ActivationMap(props: Props) {
     else map.once("idle", apply);
   }, [props]);
 
-  return <div ref={container} className="h-full w-full" />;
+  return (
+    <div className="relative h-full w-full">
+      <div ref={container} className="h-full w-full" />
+      <ul className="pointer-events-none absolute bottom-20 left-3 z-10 space-y-1.5 rounded border border-line bg-ink/95 px-3 py-2 text-sm text-paper">
+        {LEGEND.map((item) => (
+          <li key={item.label} className="flex items-center gap-2">
+            <span className="h-3 w-3 shrink-0 rounded-full" style={{ background: item.color }} />
+            <span>{item.label}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
+
+const LEGEND = [
+  { color: "#e15a1c", label: "Orange · specialist gap" },
+  { color: "#d89a2b", label: "Yellow · funding or assessment" },
+  { color: "#2f8f55", label: "Green · ready or underway" },
+  { color: "#9aa196", label: "Grey · planning review" },
+  { color: "#c44736", label: "Red · environmental" },
+];
 
 function pointsFrom(payload: MapPayload) {
   return {
