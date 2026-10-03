@@ -1,0 +1,173 @@
+[
+  {
+    "APN": "1-139-15",
+    "SitusAddress": "419 4TH ST OAKLAND 94607",
+    "SitusZip": "94607",
+    "UseCode": "4100",
+    "Land": 572703,
+    "Imps": 437446,
+    "TotalNetValue": 1010149
+  },
+  {
+    "APN": "2-85-4",
+    "SitusAddress": "102 10TH ST OAKLAND 94607",
+    "SitusZip": "94607",
+    "UseCode": "8100",
+    "Land": 172556,
+    "Imps": 85027,
+    "TotalNetValue": 257583
+  },
+  {
+    "APN": "2-85-10",
+    "SitusAddress": "113 10TH ST OAKLAND 94607",
+    "SitusZip": "94607",
+    "UseCode": "4100",
+    "Land": 311467,
+    "Imps": 265785,
+    "TotalNetValue": 577252
+  },
+  {
+    "APN": "3-39-3",
+    "SitusAddress": "2103 SAN PABLO AVE OAKLAND 94612",
+    "SitusZip": "94612",
+    "UseCode": "4800",
+    "Land": 2346000,
+    "Imps": 1224000,
+    "TotalNetValue": 3585448
+  },
+  {
+    "APN": "3-71-21",
+    "SitusAddress": "616 14TH ST OAKLAND 94612",
+    "SitusZip": "94612",
+    "UseCode": "8900",
+    "Land": 1450150,
+    "Imps": 334650,
+    "TotalNetValue": 1784800
+  },
+  {
+    "APN": "8-626-16",
+    "SitusAddress": "1443 ALICE ST OAKLAND 94612",
+    "SitusZip": "94612",
+    "UseCode": "8400",
+    "Land": 265086,
+    "Imps": 205317,
+    "TotalNetValue": 470403
+  },
+  {
+    "APN": "8-626-30-1",
+    "SitusAddress": "1600 HARRISON ST OAKLAND 94612",
+    "SitusZip": "94612",
+    "UseCode": "0300",
+    "Land": 0,
+    "Imps": 0,
+    "TotalNetValue": 0
+  },
+  {
+    "APN": "8-645-33-1",
+    "SitusAddress": "525 21ST ST OAKLAND 94612",
+    "SitusZip": "94612",
+    "UseCode": "9400",
+    "Land": 317854,
+    "Imps": 176557,
+    "TotalNetValue": 494411
+  },
+  {
+    "APN": "7-563-128",
+    "SitusAddress": "1708 WOOD ST OAKLAND 94607",
+    "SitusZip": "94607",
+    "UseCode": "7090",
+    "Land": 0,
+    "Imps": 0,
+    "TotalNetValue": 0
+  },
+  {
+    "APN": "7-563-137",
+    "SitusAddress": "1708 WOOD ST OAKLAND 94607",
+    "SitusZip": "94607",
+    "UseCode": "7395",
+    "Land": 0,
+    "Imps": 0,
+    "TotalNetValue": 0
+  },
+  {
+    "APN": "13-1099-25-1",
+    "SitusAddress": "4432 TELEGRAPH AVE OAKLAND 94609",
+    "SitusZip": "94609",
+    "UseCode": "3100",
+    "Land": 2119450,
+    "Imps": 2119450,
+    "TotalNetValue": 4238900
+  },
+  {
+    "APN": "18-460-2",
+    "SitusAddress": "48 5TH AVE OAKLAND 94606",
+    "SitusZip": "94606",
+    "UseCode": "1160",
+    "Land": 1948356,
+    "Imps": 487089,
+    "TotalNetValue": 2435445
+  },
+  {
+    "APN": "18-460-4-15",
+    "SitusAddress": "48 5TH AVE OAKLAND 94606",
+    "SitusZip": "94606",
+    "UseCode": "4200",
+    "Land": 197676,
+    "Imps": 749088,
+    "TotalNetValue": 946764
+  },
+  {
+    "APN": "20-153-15-1",
+    "SitusAddress": "1440 23RD AVE OAKLAND 94606",
+    "SitusZip": "94606",
+    "UseCode": "3200",
+    "Land": 270494,
+    "Imps": 629314,
+    "TotalNetValue": 899808
+  },
+  {
+    "APN": "20-104-8",
+    "SitusAddress": "1218 MILLER AVE OAKLAND 94601",
+    "SitusZip": "94601",
+    "UseCode": "1950",
+    "Land": 630357,
+    "Imps": 4173834,
+    "TotalNetValue": 4804191
+  },
+  {
+    "APN": "41-3901-4",
+    "SitusAddress": "796 66TH AVE OAKLAND 94621",
+    "SitusZip": "94621",
+    "UseCode": "0300",
+    "Land": 0,
+    "Imps": 0,
+    "TotalNetValue": 0
+  },
+  {
+    "APN": "7-563-96",
+    "SitusAddress": "1708 WOOD ST OAKLAND 94607",
+    "SitusZip": "94607",
+    "UseCode": "7305",
+    "Land": 210000,
+    "Imps": 490000,
+    "TotalNetValue": 700000
+  },
+  {
+    "APN": "4-108-7",
+    "SitusAddress": "1300 7TH ST OAKLAND 94607",
+    "SitusZip": "94607",
+    "UseCode": "4100",
+    "Land": 2334640,
+    "Imps": 5412120,
+    "TotalNetValue": 7746760
+  },
+  {
+    "APN": "4-51-18-2",
+    "SitusAddress": "1255 7TH ST OAKLAND 94607",
+    "SitusZip": "94607",
+    "UseCode": "4100",
+    "Land": 520200,
+    "Imps": 832320,
+    "TotalNetValue": 1352520
+  }
+]

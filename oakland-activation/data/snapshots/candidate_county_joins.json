@@ -1,0 +1,245 @@
+{
+  "BB-001": [
+    {
+      "apn": "4-108-7",
+      "situs_address": "1300 7TH ST OAKLAND 94607",
+      "situs_zip": "94607",
+      "use_code": "4100",
+      "land_value": 2334640,
+      "improvement_value": 5412120,
+      "assessed_value": 7746760,
+      "source_id": "ac_parcels",
+      "status": "PUBLIC"
+    }
+  ],
+  "BB-002": [
+    {
+      "apn": "4-51-18-2",
+      "situs_address": "1255 7TH ST OAKLAND 94607",
+      "situs_zip": "94607",
+      "use_code": "4100",
+      "land_value": 520200,
+      "improvement_value": 832320,
+      "assessed_value": 1352520,
+      "source_id": "ac_parcels",
+      "status": "PUBLIC"
+    }
+  ],
+  "BB-003": [
+    {
+      "apn": "7-563-128",
+      "situs_address": "1708 WOOD ST OAKLAND 94607",
+      "situs_zip": "94607",
+      "use_code": "7090",
+      "land_value": 0,
+      "improvement_value": 0,
+      "assessed_value": 0,
+      "source_id": "ac_parcels",
+      "status": "PUBLIC"
+    },
+    {
+      "apn": "7-563-137",
+      "situs_address": "1708 WOOD ST OAKLAND 94607",
+      "situs_zip": "94607",
+      "use_code": "7395",
+      "land_value": 0,
+      "improvement_value": 0,
+      "assessed_value": 0,
+      "source_id": "ac_parcels",
+      "status": "PUBLIC"
+    },
+    {
+      "apn": "7-563-96",
+      "situs_address": "1708 WOOD ST OAKLAND 94607",
+      "situs_zip": "94607",
+      "use_code": "7305",
+      "land_value": 210000,
+      "improvement_value": 490000,
+      "assessed_value": 700000,
+      "source_id": "ac_parcels",
+      "status": "PUBLIC"
+    }
+  ],
+  "BB-004": [],
+  "BB-005": [
+    {
+      "apn": "41-3901-4",
+      "situs_address": "796 66TH AVE OAKLAND 94621",
+      "situs_zip": "94621",
+      "use_code": "0300",
+      "land_value": 0,
+      "improvement_value": 0,
+      "assessed_value": 0,
+      "source_id": "ac_parcels",
+      "status": "PUBLIC"
+    }
+  ],
+  "BB-006": [
+    {
+      "apn": "8-626-16",
+      "situs_address": "1443 ALICE ST OAKLAND 94612",
+      "situs_zip": "94612",
+      "use_code": "8400",
+      "land_value": 265086,
+      "improvement_value": 205317,
+      "assessed_value": 470403,
+      "source_id": "ac_parcels",
+      "status": "PUBLIC"
+    }
+  ],
+  "BB-007": [
+    {
+      "apn": "18-460-2",
+      "situs_address": "48 5TH AVE OAKLAND 94606",
+      "situs_zip": "94606",
+      "use_code": "1160",
+      "land_value": 1948356,
+      "improvement_value": 487089,
+      "assessed_value": 2435445,
+      "source_id": "ac_parcels",
+      "status": "PUBLIC"
+    },
+    {
+      "apn": "18-460-4-15",
+      "situs_address": "48 5TH AVE OAKLAND 94606",
+      "situs_zip": "94606",
+      "use_code": "4200",
+      "land_value": 197676,
+      "improvement_value": 749088,
+      "assessed_value": 946764,
+      "source_id": "ac_parcels",
+      "status": "PUBLIC"
+    }
+  ],
+  "BB-008": [
+    {
+      "apn": "2-85-10",
+      "situs_address": "113 10TH ST OAKLAND 94607",
+      "situs_zip": "94607",
+      "use_code": "4100",
+      "land_value": 311467,
+      "improvement_value": 265785,
+      "assessed_value": 577252,
+      "source_id": "ac_parcels",
+      "status": "PUBLIC"
+    }
+  ],
+  "BB-009": [
+    {
+      "apn": "20-104-8",
+      "situs_address": "1218 MILLER AVE OAKLAND 94601",
+      "situs_zip": "94601",
+      "use_code": "1950",
+      "land_value": 630357,
+      "improvement_value": 4173834,
+      "assessed_value": 4804191,
+      "source_id": "ac_parcels",
+      "status": "PUBLIC"
+    }
+  ],
+  "BB-010": [
+    {
+      "apn": "2-85-4",
+      "situs_address": "102 10TH ST OAKLAND 94607",
+      "situs_zip": "94607",
+      "use_code": "8100",
+      "land_value": 172556,
+      "improvement_value": 85027,
+      "assessed_value": 257583,
+      "source_id": "ac_parcels",
+      "status": "PUBLIC"
+    }
+  ],
+  "BB-011": [
+    {
+      "apn": "1-139-15",
+      "situs_address": "419 4TH ST OAKLAND 94607",
+      "situs_zip": "94607",
+      "use_code": "4100",
+      "land_value": 572703,
+      "improvement_value": 437446,
+      "assessed_value": 1010149,
+      "source_id": "ac_parcels",
+      "status": "PUBLIC"
+    }
+  ],
+  "BB-012": [
+    {
+      "apn": "3-39-3",
+      "situs_address": "2103 SAN PABLO AVE OAKLAND 94612",
+      "situs_zip": "94612",
+      "use_code": "4800",
+      "land_value": 2346000,
+      "improvement_value": 1224000,
+      "assessed_value": 3585448,
+      "source_id": "ac_parcels",
+      "status": "PUBLIC"
+    }
+  ],
+  "BB-013": [
+    {
+      "apn": "13-1099-25-1",
+      "situs_address": "4432 TELEGRAPH AVE OAKLAND 94609",
+      "situs_zip": "94609",
+      "use_code": "3100",
+      "land_value": 2119450,
+      "improvement_value": 2119450,
+      "assessed_value": 4238900,
+      "source_id": "ac_parcels",
+      "status": "PUBLIC"
+    }
+  ],
+  "BB-014": [
+    {
+      "apn": "8-645-33-1",
+      "situs_address": "525 21ST ST OAKLAND 94612",
+      "situs_zip": "94612",
+      "use_code": "9400",
+      "land_value": 317854,
+      "improvement_value": 176557,
+      "assessed_value": 494411,
+      "source_id": "ac_parcels",
+      "status": "PUBLIC"
+    }
+  ],
+  "BB-015": [
+    {
+      "apn": "8-626-30-1",
+      "situs_address": "1600 HARRISON ST OAKLAND 94612",
+      "situs_zip": "94612",
+      "use_code": "0300",
+      "land_value": 0,
+      "improvement_value": 0,
+      "assessed_value": 0,
+      "source_id": "ac_parcels",
+      "status": "PUBLIC"
+    }
+  ],
+  "BB-016": [
+    {
+      "apn": "3-71-21",
+      "situs_address": "616 14TH ST OAKLAND 94612",
+      "situs_zip": "94612",
+      "use_code": "8900",
+      "land_value": 1450150,
+      "improvement_value": 334650,
+      "assessed_value": 1784800,
+      "source_id": "ac_parcels",
+      "status": "PUBLIC"
+    }
+  ],
+  "BB-017": [],
+  "BB-018": [
+    {
+      "apn": "20-153-15-1",
+      "situs_address": "1440 23RD AVE OAKLAND 94606",
+      "situs_zip": "94606",
+      "use_code": "3200",
+      "land_value": 270494,
+      "improvement_value": 629314,
+      "assessed_value": 899808,
+      "source_id": "ac_parcels",
+      "status": "PUBLIC"
+    }
+  ]
+}

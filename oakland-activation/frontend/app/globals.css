@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body { height: 100%; background: #141714; color: #f4f0e6; }
+body { font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif; }
+.maplibregl-ctrl-attrib { display: none !important; }
+* { scrollbar-width: thin; scrollbar-color: #2e342e transparent; }

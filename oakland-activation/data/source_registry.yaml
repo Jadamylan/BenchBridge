@@ -1,0 +1,263 @@
+- id: ac_parcels
+  name: Alameda County parcel boundaries
+  agency: Alameda County
+  source_url: https://services5.arcgis.com/ROBnTHSNjoZ2Wm1P/arcgis/rest/services/Parcels/FeatureServer/0
+  category: parcels
+  retrieval_method: API
+  update_frequency: county GIS refresh
+  retrieved_at: 2026-10-03
+  status: PUBLIC
+  verified: true
+  notes: Cached assessed value, use code, APN, and situs for candidate addresses that matched. Filtered to Oakland. Not a full county extract.
+
+- id: oakland_city_owned
+  name: CityOwnedProperties
+  agency: City of Oakland
+  source_url: https://gismaps.oaklandca.gov/oaklandgis/rest/services/CityOwnedProperties/FeatureServer/0
+  category: property
+  retrieval_method: API
+  update_frequency: city GIS refresh
+  retrieved_at: 2026-10-03
+  status: PUBLIC
+  verified: true
+  notes: First 80 Oakland features in the service, geometries in WGS84. Contact, phone, and email fields were dropped. City ownership of a parcel is not a rehabilitation candidate.
+
+- id: oakland_housing_element
+  name: Housing Element Opportunity Sites
+  agency: City of Oakland Planning and Building
+  source_url: https://gismaps.oaklandca.gov/server/rest/services/Planning_and_Zoning_Controls/FeatureServer/20
+  category: planning
+  retrieval_method: API
+  update_frequency: planning GIS refresh
+  retrieved_at: 2026-10-03
+  status: PUBLIC
+  verified: true
+  notes: Cached query of sites with year built after 1900 and building area over 4,000 square feet (30 records) plus a West Oakland envelope query. Not the complete inventory. Owner names were not requested.
+
+- id: oakland_planning
+  name: Zoning and general-plan codes on the Housing Element layer
+  agency: City of Oakland
+  source_url: https://gismaps.oaklandca.gov/server/rest/services/Planning_and_Zoning_Controls/FeatureServer/20
+  category: planning
+  retrieval_method: API
+  update_frequency: planning GIS refresh
+  retrieved_at: 2026-10-03
+  status: PUBLIC
+  verified: true
+  notes: Codes are displayed as signals. They are not a zoning determination. General-plan code descriptions were not in a joined lookup.
+
+- id: environmental_records
+  name: GeoTracker / CalEnviroScreen / Oakland environmental GIS
+  agency: California State Water Resources Control Board and others
+  source_url: https://geotracker.waterboards.ca.gov/
+  category: environment
+  retrieval_method: MANUAL_SNAPSHOT
+  update_frequency: unknown
+  retrieved_at: 2026-10-03
+  status: PUBLIC
+  verified: false
+  notes: No cleanup records were cached in this build. The layer states that absence. Asbestos is never inferred.
+
+- id: cslb
+  name: Contractors State License Board
+  agency: California CSLB
+  source_url: https://www.cslb.ca.gov/OnlineServices/CheckLicenseII/CheckLicense.aspx
+  category: contractors
+  retrieval_method: MANUAL_SNAPSHOT
+  update_frequency: unknown
+  retrieved_at: 2026-10-03
+  status: PUBLIC
+  verified: false
+  notes: No bulk license extract was loaded. The product does not invent license numbers. Illustrative firms are a separate DEMO seed.
+
+- id: alameda_qualified_contractors
+  name: Alameda County qualified contractor list
+  agency: Alameda County
+  source_url: https://www.acgov.org/
+  category: contractors
+  retrieval_method: MANUAL_SNAPSHOT
+  update_frequency: unknown
+  retrieved_at: 2026-10-03
+  status: PUBLIC
+  verified: false
+  notes: A clean download was not completed in the time box. No county list rows are presented as public matches.
+
+- id: dir_prevailing_wage
+  name: California prevailing wage determinations
+  agency: Department of Industrial Relations
+  source_url: https://www.dir.ca.gov/oprl/DPrevWageDetermination.htm
+  category: wages
+  retrieval_method: MANUAL_SNAPSHOT
+  update_frequency: determinations are issued by DIR
+  retrieved_at: 2026-10-03
+  status: PUBLIC
+  verified: true
+  notes: Context sentence only. Wage dollar amounts were not copied. Verify project-specific requirements.
+
+- id: pit_city_2026
+  name: Oakland homelessness decline release
+  agency: City of Oakland
+  source_url: https://www.oaklandca.gov/News-Releases/Oakland-Homelessness-Falls-Nearly-20-Percent
+  category: context
+  retrieval_method: API
+  update_frequency: biennial point-in-time
+  retrieved_at: 2026-10-03
+  status: PUBLIC
+  verified: true
+  notes: Retrieved 2026-10-03. Confirms 53.8 percent county share and unsheltered decline from 3,659 to 2,695. Preliminary.
+
+- id: pit_lnm_2026
+  name: Alameda County 2026 point-in-time report
+  agency: Local News Matters / Bay City News, citing the County
+  source_url: https://localnewsmatters.org/2026/05/20/alameda-county-homeless-count-drops-13-preliminary-2026-point-in-time-data-shows/
+  category: context
+  retrieval_method: API
+  update_frequency: biennial
+  retrieved_at: 2026-10-03
+  status: PUBLIC
+  verified: true
+  notes: Confirms Oakland 4,410 (from 5,485) and county 8,201 (from 9,450), unsheltered 5,202 (from 6,343). Preliminary. County health department page is linked from the City release.
+
+- id: edd_july_2026
+  name: California unemployment and payroll jobs, July 2026
+  agency: California Employment Development Department
+  source_url: https://edd.ca.gov/en/about_edd/news_releases_and_announcements/unemployment-july-2026/
+  category: context
+  retrieval_method: API
+  update_frequency: monthly
+  retrieved_at: 2026-10-03
+  status: PUBLIC
+  verified: true
+  notes: Construction 887,400 jobs, year-over-year -6,700. Alameda County unemployment 4.6 percent, preliminary, not seasonally adjusted.
+
+- id: measure_u
+  name: SPUR voter guide, Oakland Measure U
+  agency: SPUR
+  source_url: https://www.spur.org/voter-guide/2022-11/oak-measure-u-infrastructure-bond
+  category: context
+  retrieval_method: API
+  update_frequency: static voter guide
+  retrieved_at: 2026-10-03
+  status: PUBLIC
+  verified: true
+  notes: $850 million authorization including $350 million for affordable housing. Authorization, not remaining balance. PLA status after late 2024 is unverified.
+
+- id: us_construction_2025
+  name: National construction job growth, 2025
+  agency: Associated Builders and Contractors analysis, via Underground Infrastructure
+  source_url: https://undergroundinfrastructure.com/news/2026/january/construction-jobs-stumble-into-2026-after-weak-year
+  category: context
+  retrieval_method: MANUAL_SNAPSHOT
+  update_frequency: unknown
+  retrieved_at: 2026-10-03
+  status: PUBLIC
+  verified: false
+  notes: Cached figure was not re-read from the article in this build.
+
+- id: sf_trades_survey_2023
+  name: San Francisco Building Trades Council out-of-work survey
+  agency: San Francisco Standard
+  source_url: https://sfstandard.com/2023/05/12/downtown-san-francisco-1200-contractors-left-jobless-as-doom-loop-bites/
+  category: context
+  retrieval_method: MANUAL_SNAPSHOT
+  update_frequency: one-time report
+  retrieved_at: 2026-10-03
+  status: PUBLIC
+  verified: false
+  notes: Precedent only. Not Alameda County. Not re-verified against the article text in this build. No Alameda agreement is implied.
+
+- id: hcd_nc_nofa
+  name: Secondary report of Oakland housing awards
+  agency: Hoodline (secondary)
+  source_url: https://hoodline.com/
+  category: context
+  retrieval_method: MANUAL_SNAPSHOT
+  update_frequency: unknown
+  retrieved_at: 2026-10-03
+  status: PUBLIC
+  verified: false
+  notes: Not shown in Judge Mode or the context strip. Verify with Oakland HCD before any use.
+
+- id: demo_rehab
+  name: Modeled rehabilitation scenarios
+  agency: BenchBridge hackathon seed
+  source_url: ""
+  category: demo
+  retrieval_method: DEMO_SEED
+  update_frequency: static seed
+  retrieved_at: 2026-10-03
+  status: DEMO
+  verified: false
+  notes: Tasks, costs, funds, potential units, and blockers are modeled. Not inspections or approvals.
+
+- id: demo_workforce
+  name: Demo aggregate bench
+  agency: BenchBridge hackathon seed
+  source_url: ""
+  category: demo
+  retrieval_method: DEMO_SEED
+  update_frequency: static seed
+  retrieved_at: 2026-10-03
+  status: DEMO
+  verified: false
+  notes: Fictional aggregate counts. Total 64. Not a live out-of-work list.
+
+- id: demo_contractors
+  name: Illustrative contractor cards
+  agency: BenchBridge hackathon seed
+  source_url: ""
+  category: demo
+  retrieval_method: DEMO_SEED
+  update_frequency: static seed
+  retrieved_at: 2026-10-03
+  status: DEMO
+  verified: false
+  notes: Synthetic DEMO- license numbers. Union status unknown. Not an endorsement or bid.
+
+- id: schematic_basemap
+  name: Offline schematic shoreline, streets, and neighborhood boxes
+  agency: BenchBridge
+  source_url: ""
+  category: basemap
+  retrieval_method: DEMO_SEED
+  update_frequency: static
+  retrieved_at: 2026-10-03
+  status: DEMO
+  verified: false
+  notes: Orientation only. Parcel polygons for candidates and city-owned features are from the public extracts.
+
+- id: authorized_union_workforce
+  name: Participating union or council aggregate feed
+  agency: Not configured
+  source_url: ""
+  category: workforce
+  retrieval_method: STUB
+  update_frequency: would be weekly if a partner opted in
+  retrieved_at: 2026-10-03
+  status: PARTNER_REQUIRED
+  verified: false
+  notes: No Alameda County agreement exists. BenchBridge does not imply one.
+
+- id: city_registry_aggregate
+  name: City local-resident construction job-seeker registry, aggregate only
+  agency: Oakland Department of Workplace and Employment Standards
+  source_url: https://www.oaklandca.gov/
+  category: workforce
+  retrieval_method: STUB
+  update_frequency: unknown
+  retrieved_at: 2026-10-03
+  status: PARTNER_REQUIRED
+  verified: false
+  notes: No individual records. The provider is a stub.
+
+- id: oakland_local_hire
+  name: Oakland Local Employment Program
+  agency: City of Oakland
+  source_url: https://www.oaklandca.gov/
+  category: policy
+  retrieval_method: STUB
+  update_frequency: unknown
+  retrieved_at: 2026-10-03
+  status: PARTNER_REQUIRED
+  verified: false
+  notes: Methodology context only. Not a worker-availability feed.

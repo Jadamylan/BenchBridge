@@ -1,0 +1,1 @@
+{"type": "FeatureCollection", "features": [{"type": "Feature", "properties": {"block_id": "west-oakland-7th", "name": "West Oakland block", "note": "Navigation extent around the three modeled candidates. Not a legal block."}, "geometry": {"type": "Polygon", "coordinates": [[[-122.3, 37.8], [-122.285, 37.8], [-122.285, 37.818], [-122.3, 37.818], [-122.3, 37.8]]]}}]}

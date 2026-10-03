@@ -36,6 +36,20 @@ The goal is to surface **realistic pathways** and be transparent about why somet
 
 ---
 
+## Oakland activation demo
+
+This branch adds a second arm: a presenter-ready Oakland map. It connects candidate rehabilitation buildings, the modeled work those buildings would take, and a clearly labeled demo bench. It does not replace union dispatch.
+
+From `oakland-activation`:
+
+```bash
+make demo
+```
+
+The API is http://127.0.0.1:8000. Judge mode is http://127.0.0.1:3010/demo.
+
+---
+
 ## What is in this repo
 
 This repository contains a public-safe starter data pack for an SF + Alameda prototype.

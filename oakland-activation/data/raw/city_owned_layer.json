@@ -1,0 +1,397 @@
+{
+ "currentVersion": 10.51,
+ "id": 0,
+ "name": "CityOwnedProperties",
+ "parentLayerId": -1,
+ "defaultVisibility": true,
+ "minScale": 0,
+ "maxScale": 0,
+ "type": "Feature Layer",
+ "geometryType": "esriGeometryPolygon",
+ "description": "",
+ "copyrightText": "",
+ "editFieldsInfo": null,
+ "ownershipBasedAccessControlForFeatures": null,
+ "syncCanReturnChanges": true,
+ "relationships": [],
+ "isDataVersioned": true,
+ "supportsRollbackOnFailureParameter": false,
+ "archivingInfo": {
+  "supportsQueryWithHistoricMoment": false,
+  "startArchivingMoment": -1
+ },
+ "supportsStatistics": true,
+ "supportsAdvancedQueries": true,
+ "supportsValidateSQL": true,
+ "supportsCalculate": false,
+ "advancedQueryCapabilities": {
+  "supportsPagination": true,
+  "supportsTrueCurve": true,
+  "supportsQueryWithDistance": true,
+  "supportsReturningQueryExtent": true,
+  "supportsStatistics": true,
+  "supportsOrderBy": true,
+  "supportsDistinct": true,
+  "supportsSqlExpression": true
+ },
+ "extent": {
+  "xmin": 6040459.2309081,
+  "ymin": 2057180.20905609,
+  "xmax": 6094724.03019063,
+  "ymax": 2152339.25298472,
+  "spatialReference": {
+   "wkid": 102643,
+   "latestWkid": 2227
+  }
+ },
+ "drawingInfo": {
+  "renderer": {
+   "type": "simple",
+   "symbol": {
+    "type": "esriSFS",
+    "style": "esriSFSSolid",
+    "color": [
+     206,
+     196,
+     242,
+     255
+    ],
+    "outline": {
+     "type": "esriSLS",
+     "style": "esriSLSNull",
+     "color": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "width": 0
+    }
+   },
+   "label": "",
+   "description": ""
+  },
+  "transparency": 0,
+  "labelingInfo": null
+ },
+ "hasM": false,
+ "hasZ": false,
+ "allowGeometryUpdates": true,
+ "allowTrueCurvesUpdates": false,
+ "onlyAllowTrueCurveUpdatesByTrueCurveClients": true,
+ "hasAttachments": false,
+ "supportsApplyEditsWithGlobalIds": false,
+ "htmlPopupType": "esriServerHTMLPopupTypeAsHTMLText",
+ "objectIdField": "OBJECTID",
+ "globalIdField": "GLOBALID",
+ "displayField": "STNAME",
+ "typeIdField": "",
+ "subtypeField": "",
+ "fields": [
+  {
+   "name": "OBJECTID",
+   "type": "esriFieldTypeOID",
+   "alias": "OBJECTID",
+   "domain": null,
+   "editable": false,
+   "nullable": false
+  },
+  {
+   "name": "APN",
+   "type": "esriFieldTypeString",
+   "alias": "APN",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 20
+  },
+  {
+   "name": "ST_NO",
+   "type": "esriFieldTypeString",
+   "alias": "ST_NO",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 14
+  },
+  {
+   "name": "STNAME",
+   "type": "esriFieldTypeString",
+   "alias": "STNAME",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 23
+  },
+  {
+   "name": "OWNER",
+   "type": "esriFieldTypeString",
+   "alias": "OWNER",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 60
+  },
+  {
+   "name": "AGENCY",
+   "type": "esriFieldTypeString",
+   "alias": "AGENCY",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 30
+  },
+  {
+   "name": "DEPT",
+   "type": "esriFieldTypeString",
+   "alias": "DEPT",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 50
+  },
+  {
+   "name": "USE",
+   "type": "esriFieldTypeString",
+   "alias": "USE",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 50
+  },
+  {
+   "name": "PHOTO_FILE",
+   "type": "esriFieldTypeString",
+   "alias": "PHOTO_FILE",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 25
+  },
+  {
+   "name": "DATE_ACQUI",
+   "type": "esriFieldTypeString",
+   "alias": "DATE_ACQUI",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 19
+  },
+  {
+   "name": "AQU__COST",
+   "type": "esriFieldTypeString",
+   "alias": "AQU__COST",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 30
+  },
+  {
+   "name": "DISP_DATE",
+   "type": "esriFieldTypeString",
+   "alias": "DISP_DATE",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 19
+  },
+  {
+   "name": "DISP_PRICE",
+   "type": "esriFieldTypeString",
+   "alias": "DISP_PRICE",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 19
+  },
+  {
+   "name": "COMMENTS_1",
+   "type": "esriFieldTypeString",
+   "alias": "COMMENTS_1",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 200
+  },
+  {
+   "name": "CONTACT",
+   "type": "esriFieldTypeString",
+   "alias": "CONTACT",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 50
+  },
+  {
+   "name": "PHONE",
+   "type": "esriFieldTypeString",
+   "alias": "PHONE",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 15
+  },
+  {
+   "name": "EMAIL",
+   "type": "esriFieldTypeString",
+   "alias": "EMAIL",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 50
+  },
+  {
+   "name": "ASSET_NO",
+   "type": "esriFieldTypeString",
+   "alias": "ASSET_NO",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 20
+  },
+  {
+   "name": "COUNCIL_DISTRICT",
+   "type": "esriFieldTypeString",
+   "alias": "COUNCIL_DISTRICT",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 15
+  },
+  {
+   "name": "CITY",
+   "type": "esriFieldTypeString",
+   "alias": "CITY",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 40
+  },
+  {
+   "name": "ZIPCODE",
+   "type": "esriFieldTypeInteger",
+   "alias": "ZIPCODE",
+   "domain": null,
+   "editable": true,
+   "nullable": true
+  },
+  {
+   "name": "LEGISLATION",
+   "type": "esriFieldTypeString",
+   "alias": "LEGISLATION",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 100
+  },
+  {
+   "name": "IMPROVED",
+   "type": "esriFieldTypeString",
+   "alias": "IMPROVED",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 4
+  },
+  {
+   "name": "LOT_SIZEDIM",
+   "type": "esriFieldTypeString",
+   "alias": "LOT_SIZEDIM",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 5
+  },
+  {
+   "name": "BLD_SIZEDIM",
+   "type": "esriFieldTypeString",
+   "alias": "BLD_SIZEDIM",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 5
+  },
+  {
+   "name": "LOT_SIZE",
+   "type": "esriFieldTypeString",
+   "alias": "LOT_SIZE",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 15
+  },
+  {
+   "name": "BLD_SIZE",
+   "type": "esriFieldTypeString",
+   "alias": "BLD_SIZE",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 15
+  },
+  {
+   "name": "GLOBALID",
+   "type": "esriFieldTypeGlobalID",
+   "alias": "GLOBALID",
+   "domain": null,
+   "editable": false,
+   "nullable": false,
+   "length": 38
+  }
+ ],
+ "indexes": [
+  {
+   "name": "A1233_IX1",
+   "fields": "SHAPE",
+   "isAscending": true,
+   "isUnique": true,
+   "description": ""
+  }
+ ],
+ "dateFieldsTimeReference": {
+  "timeZone": "UTC",
+  "respectsDaylightSaving": false
+ },
+ "types": [],
+ "templates": [
+  {
+   "name": "CityOwnedProperties",
+   "description": "",
+   "prototype": {
+    "attributes": {
+     "BLD_SIZE": null,
+     "LOT_SIZE": null,
+     "APN": null,
+     "ST_NO": null,
+     "STNAME": null,
+     "OWNER": null,
+     "AGENCY": null,
+     "DEPT": null,
+     "USE": null,
+     "PHOTO_FILE": null,
+     "DATE_ACQUI": null,
+     "AQU__COST": null,
+     "DISP_DATE": null,
+     "DISP_PRICE": null,
+     "COMMENTS_1": null,
+     "CONTACT": null,
+     "PHONE": null,
+     "EMAIL": null,
+     "ASSET_NO": null,
+     "COUNCIL_DISTRICT": null,
+     "CITY": null,
+     "ZIPCODE": null,
+     "LEGISLATION": null,
+     "IMPROVED": null,
+     "LOT_SIZEDIM": null,
+     "BLD_SIZEDIM": null
+    }
+   },
+   "drawingTool": "esriFeatureEditToolPolygon"
+  }
+ ],
+ "maxRecordCount": 1000,
+ "supportedQueryFormats": "JSON, AMF, geoJSON",
+ "capabilities": "Query,Create,Update,Delete,Uploads,Editing",
+ "useStandardizedQueries": true
+}
