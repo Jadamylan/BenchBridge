@@ -65,8 +65,6 @@ It includes:
 - `data/*.csv` — normalized tables for spreadsheets, Postgres, or data frames
 - `neo4j/constraints.cypher` — graph uniqueness constraints
 - `neo4j/seed.cypher` — idempotent graph seed
-- `cursor_prompt.md` — MVP implementation brief
-- `CURSOR_UPDATE_VON.md` — shell-update / handoff prompt
 
 ---
 
